@@ -10,12 +10,12 @@ public class CorrectionVec extends BCVector<MeteoBalisticCorrectionPair>
 {
     public CorrectionDistTIt GetDistTIt()
     {
-        return new CorrectionDistTIt();
+        return new CorrectionDistTIt(this);
     }
 
     public CorrectionDistPIt GetDistPIt()
     {
-        return new CorrectionDistPIt();
+        return new CorrectionDistPIt(this);
     }
 
     public CorrectionDistWIt GetDistWit()
@@ -30,7 +30,7 @@ public class CorrectionVec extends BCVector<MeteoBalisticCorrectionPair>
 
     public CorrectionDerIt GetDerivationIt()
     {
-        return new CorrectionDerIt();
+        return new CorrectionDerIt(this);
     }
 
 }
