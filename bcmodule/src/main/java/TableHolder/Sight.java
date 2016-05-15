@@ -8,7 +8,7 @@ public class Sight
 {
     public Sight()
     {
-        m_Name = new String();
+        m_Name = null;
         m_PriceDivision = 0.0;
         m_PriceClick = 0.0;
     }

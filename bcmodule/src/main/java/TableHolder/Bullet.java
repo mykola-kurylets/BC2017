@@ -8,11 +8,11 @@ public class Bullet
 {
     public Bullet()
     {
-        m_Name = new String();
+        m_Name = null;
         m_Caliber = 0.0;
         m_Speed = 0.0;
         m_Weight = 0.0;
-        m_Description = new String();
+        m_Description = null;
     }
 
     public String m_Name;
