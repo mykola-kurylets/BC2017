@@ -4,17 +4,35 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Created by Mykola on 14.05.2016.
  */
-class GunSystemLoader
+public class GunSystemLoader extends DefaultHandler
 {
+    public GunSystemLoader()
+    {
+        m_Gs = null;
+
+        m_Guns = null;
+        m_BulletProp = null;
+        m_SightProp = null;
+        m_NormalConditions = null;
+        m_OverestimationTbl = null;
+        m_CorrectionsTbl = null;
+        m_SystemName = null;
+    }
+
     GunSystemLoader(GunSystemHolder gs)
     {
         m_Gs = gs;
@@ -25,6 +43,7 @@ class GunSystemLoader
         m_NormalConditions = m_Gs.GetNormal();
         m_OverestimationTbl = m_Gs.GetOverestimationTbl();
         m_CorrectionsTbl = m_Gs.GetCorrectionTbl();
+        m_SystemName = null;
     }
 
     boolean Load(String filePath)
@@ -51,7 +70,8 @@ class GunSystemLoader
                 if (systemNode.getNodeType() != Node.ELEMENT_NODE)
                     continue;
 
-                m_Gs.SetName(GetStringNodeAttrib(systemNode, m_NameAtrr));
+                m_SystemName = GetStringNodeAttrib(systemNode, m_NameAtrr);
+                m_Gs.SetName(m_SystemName);
 
                 if(!ReadProperties(systemNode))
                     return  false;
@@ -68,9 +88,34 @@ class GunSystemLoader
         }
         catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
 
         return true;
+    }
+
+    // метод для отримання імені системи
+    // використовується SAX parser
+    public String LoadSystemName(String filePath)
+    {
+        try {
+            File inputFile = new File(filePath);
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+            saxParser.parse(inputFile, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return m_SystemName;
+    }
+
+    @Override
+    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+        if (qName.equalsIgnoreCase(m_SystemTag)) {
+            m_SystemName = attributes.getValue(m_NameAtrr);
+        }
     }
 
     private boolean ReadProperties(Node systemNode)
@@ -388,7 +433,7 @@ class GunSystemLoader
             if (nodeName == null)
                 continue;
 
-            if (!nodeName.equals(m_SightTag))
+            if (!nodeName.equals(m_DistTag))
                 continue;
 
             MeteoBalisticCorrectionPair mbcp = ReadMeteoBalPair(distNode);
@@ -617,6 +662,7 @@ class GunSystemLoader
     private static final String m_DerivationTag         = "derivation";
 
 
+    private String              m_SystemName;
     private GunSystemHolder     m_Gs;
 
     private GunsVec             m_Guns;

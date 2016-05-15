@@ -8,8 +8,8 @@ public class BCPair<firstT, secondT>
 {
     public BCPair(firstT f, secondT s)
     {
-        first = (firstT)f.getClass();
-        second = (secondT)s.getClass();
+        first = f;
+        second = s;
     }
 
     public firstT  first;
