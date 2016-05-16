@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import Application.Application;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -12,6 +13,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        m_App = new Application(this);
+
+        // задання фрагрменту у головну активність
+        // main_container - ідентифікатор activity_main.xml
+        // android:id="@+id/main_container">
+        //m_App.SetFragment(getFragmentManager(), R.id.main_container);
 
     }
 
@@ -28,4 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private Application m_App;
 }
