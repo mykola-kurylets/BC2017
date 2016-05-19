@@ -5,6 +5,57 @@ package Utilities;
  */
 public class BCPairsVecUtilities
 {
+    public static <F extends Number, S, T extends BCPair<F, S>, D extends Number> double InterpolateInNeighborhood(VecSecondIt<T, D> it, double x)
+    {
+        BCVector<T> vec = it.GetVector();
+        if(vec == null)
+            return Double.MAX_VALUE;
+
+        int []out = {-1, -1, -1};
+        if(!FindNeighborhoodOfPoint(vec, out, x))
+            return Double.MAX_VALUE;
+
+        int startIndex = out[0];
+        int endIndex = out[1];
+        final int nearest = out[2];
+
+        if(startIndex == endIndex){
+            it.SetPos(startIndex);
+            D val = it.Get();
+            if(val == null)
+                return Double.MAX_VALUE;
+            return val.doubleValue();
+        }
+
+        if(!Find4Niarest(vec.size(), startIndex, endIndex, out))
+            return Double.MAX_VALUE;
+
+        startIndex = out[0];
+        endIndex = out[1];
+
+        InterpolationNodesVec interpolationNodes = new InterpolationNodesVec();
+        for(it.SetPos(startIndex); startIndex <= endIndex; ++startIndex, it.StepForward()){
+            T pairVal = it.GetCurrentItem();
+            D secondVal = it.Get();
+            if(secondVal == null)
+                return Double.MAX_VALUE;
+
+            interpolationNodes.add(new InterpolationNode(pairVal.first.doubleValue(), secondVal.doubleValue()));
+        }
+
+
+        double res = Double.MAX_VALUE;
+        try {
+            res = InterpolationPolynomialNewton.Calculate(x, interpolationNodes);
+            interpolationNodes.clear();
+        } catch (Exception e){
+            interpolationNodes.clear();
+            return Double.MAX_VALUE;
+        }
+
+        return res;
+    }
+
     public static boolean Find4Niarest(int lastElemIndex, int first, int second, int []out )
     {
         if(out.length < 2)
@@ -44,18 +95,18 @@ public class BCPairsVecUtilities
 
         final int size = vec.size();
 
-        if(size == 1)
-            return ChechPoint(vec.elementAt(0), out, x, 0);
+        if (size == 1)
+            return CheckPoint(vec.elementAt(0), out, x, 0);
 
         boolean outOfRange = true;
         for(int i = 0, next = 1, stape = size - 1; next <= stape; ++i, ++next){
             T pairF = vec.elementAt(i);
             T pairS = vec.elementAt(next);
             // точка у табличному значенні
-            if(ChechPoint(pairF, out, x, i))
+            if(CheckPoint(pairF, out, x, i))
                 return true;
 
-            if(ChechPoint(pairS, out, x, next))
+            if(CheckPoint(pairS, out, x, next))
                 return true;
             //
             if(pairF.first.doubleValue() < x && x < pairS.first.doubleValue() ){
@@ -80,7 +131,7 @@ public class BCPairsVecUtilities
         return true;
     }
 
-    private static <F extends Number, S, T extends BCPair<F, S>> boolean ChechPoint(T pair, int []out, Double x, int pos)
+    private static <F extends Number, S, T extends BCPair<F, S>> boolean CheckPoint(T pair, int []out, Double x, int pos)
     {
         if(out.length < 3)
             return false;

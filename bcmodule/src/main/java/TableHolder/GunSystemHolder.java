@@ -1,5 +1,7 @@
 package TableHolder;
 
+import Utilities.BCPairsVecUtilities;
+
 /**
  * Created by Mykola on 14.05.2016.
  */
@@ -22,7 +24,7 @@ public class GunSystemHolder
         return gsLoader.Load(filePath);
     }
 
-    void SetName(String name)
+    public void SetName(String name)
     {
         m_Name = name;
     }
@@ -32,36 +34,98 @@ public class GunSystemHolder
         return m_Name;
     }
 
-    GunsVec GetGunsVec()
+    public GunsVec GetGunsVec()
     {
         return m_Guns;
     }
 
-    Bullet GetBullet()
+    public Bullet GetBullet()
     {
         return m_BulletProp;
     }
 
-    Sight GetSight()
+    public Sight GetSight()
     {
         return m_SightProp;
     }
 
-    Normal GetNormal()
+    public Normal GetNormal()
     {
         return m_NormalConditions;
     }
 
-    OverestimationVec GetOverestimationTbl()
+    public OverestimationVec GetOverestimationTbl()
     {
         return m_OverestimationTbl;
     }
 
-    CorrectionVec GetCorrectionTbl()
+    public CorrectionVec GetCorrectionTbl()
     {
         return m_CorrectionsTbl;
     }
 
+    public double GetTemperatureCorrect(double x)
+    {
+        CorrectionDistTIt it = m_CorrectionsTbl.GetDistTIt();
+        if(it == null)
+            return Double.MAX_VALUE;
+
+        return BCPairsVecUtilities.InterpolateInNeighborhood(it, x);
+    }
+
+    public double GetPressureCorrect(double x)
+    {
+        CorrectionDistPIt it = m_CorrectionsTbl.GetDistPIt();
+        if(it == null)
+            return Double.MAX_VALUE;
+
+        return BCPairsVecUtilities.InterpolateInNeighborhood(it, x);
+    }
+
+    public double GetWindOnDistance(double dist, double windSpeed, int []out)
+    {
+        if(out.length < 1)
+            return Double.MAX_VALUE;
+
+        CorrectionDistWIt wIt = m_CorrectionsTbl.GetDistWit();
+
+        if(wIt == null)
+            return Double.MAX_VALUE;
+
+        if(!wIt.SetWindIndex(windSpeed))
+            return Double.MAX_VALUE;
+
+        out[0] = wIt.GetWindIndex();
+
+        return BCPairsVecUtilities.InterpolateInNeighborhood(wIt, dist);
+    }
+
+    public double GetWindOnDirection(double dist, double windSpeed, int []out)
+    {
+        if(out.length < 1)
+            return Double.MAX_VALUE;
+
+        CorrectionDirWIt wIt = m_CorrectionsTbl.GetDirWIt();
+
+        if(wIt == null)
+            return Double.MAX_VALUE;
+
+        if(!wIt.SetWindIndex(windSpeed))
+            return Double.MAX_VALUE;
+
+        out[0] = wIt.GetWindIndex();
+
+        return BCPairsVecUtilities.InterpolateInNeighborhood(wIt, dist);
+    }
+
+    public double GetDerivation(double x)
+    {
+        CorrectionDerIt it = m_CorrectionsTbl.GetDerivationIt();
+        if(it == null)
+            return Double.MAX_VALUE;
+
+        return BCPairsVecUtilities.InterpolateInNeighborhood(it, x);
+    }
 
     private String              m_Name;
     private GunsVec             m_Guns;
