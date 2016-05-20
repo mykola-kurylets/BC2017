@@ -8,4 +8,8 @@ import Utilities.BCVector;
  */
 public class OverestimationVec extends BCVector<SightParams>
 {
+    public OverstimationIt GetOverestimationIt(double dist)
+    {
+        return new OverstimationIt(this, dist);
+    }
 }

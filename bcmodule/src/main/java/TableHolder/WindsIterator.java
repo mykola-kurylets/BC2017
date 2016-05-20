@@ -12,6 +12,7 @@ public abstract class WindsIterator extends VecSecondIt<MeteoBalisticCorrectionP
     public WindsIterator(BCVector<MeteoBalisticCorrectionPair> vec) {
         super(vec);
         m_WindIndex = -1;
+        m_DescretWind = -1;
     }
 
     @Override
@@ -48,6 +49,7 @@ public abstract class WindsIterator extends VecSecondIt<MeteoBalisticCorrectionP
             return false;
 
         m_WindIndex = windPoints[2];
+        m_DescretWind = winds.elementAt(m_WindIndex).first;
 
         return true;
     }
@@ -57,7 +59,10 @@ public abstract class WindsIterator extends VecSecondIt<MeteoBalisticCorrectionP
         return m_WindIndex;
     }
 
+    public int GetDescretWind(){ return m_DescretWind; }
+
     protected abstract WindsVec GetWinds();
 
     protected int m_WindIndex;
+    protected int m_DescretWind;
 }

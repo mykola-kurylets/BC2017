@@ -12,7 +12,7 @@ public class InputData
         m_Temperature   = 0.0;
         m_Pressure      = 0.0;
         m_WindSpeed     = 0.0;
-        m_WindDirection = 0;
+        m_WindDirection = WindDirections.e0;
     }
 
     public void SetDistance(double dist)
@@ -35,7 +35,7 @@ public class InputData
         m_WindSpeed = speed;
     }
 
-    public void SetWindDirection(int dir)
+    public void SetWindDirection(WindDirections dir)
     {
         m_WindDirection = dir;
     }
@@ -60,7 +60,7 @@ public class InputData
         return m_WindSpeed;
     }
 
-    public int SetWindDirection()
+    public WindDirections GetWindDirection()
     {
         return m_WindDirection;
     }
@@ -69,5 +69,5 @@ public class InputData
     private double m_Temperature;
     private double m_Pressure;
     private double m_WindSpeed;
-    private int m_WindDirection;
+    private WindDirections m_WindDirection;
 }

@@ -1,5 +1,7 @@
 package TableHolder;
 
+import Utilities.BCDouble;
+import Utilities.BCInteger;
 import Utilities.BCPairsVecUtilities;
 
 /**
@@ -54,6 +56,16 @@ public class GunSystemHolder
         return m_NormalConditions;
     }
 
+    public double GetNormalAirTemperature()
+    {
+        return m_NormalConditions.m_AirTemperature;
+    }
+
+    public double GetNormalAirPressure()
+    {
+        return m_NormalConditions.m_Pressure;
+    }
+
     public OverestimationVec GetOverestimationTbl()
     {
         return m_OverestimationTbl;
@@ -82,12 +94,9 @@ public class GunSystemHolder
         return BCPairsVecUtilities.InterpolateInNeighborhood(it, x);
     }
 
-    public double GetWindOnDistance(double dist, double windSpeed, int []out)
+    public double GetWindOnDistanceOrDirection(double dist, double windSpeed, BCInteger out, boolean distance)
     {
-        if(out.length < 1)
-            return Double.MAX_VALUE;
-
-        CorrectionDistWIt wIt = m_CorrectionsTbl.GetDistWit();
+        WindsIterator wIt = (distance)?(m_CorrectionsTbl.GetDistWit()):(m_CorrectionsTbl.GetDirWIt());
 
         if(wIt == null)
             return Double.MAX_VALUE;
@@ -95,25 +104,7 @@ public class GunSystemHolder
         if(!wIt.SetWindIndex(windSpeed))
             return Double.MAX_VALUE;
 
-        out[0] = wIt.GetWindIndex();
-
-        return BCPairsVecUtilities.InterpolateInNeighborhood(wIt, dist);
-    }
-
-    public double GetWindOnDirection(double dist, double windSpeed, int []out)
-    {
-        if(out.length < 1)
-            return Double.MAX_VALUE;
-
-        CorrectionDirWIt wIt = m_CorrectionsTbl.GetDirWIt();
-
-        if(wIt == null)
-            return Double.MAX_VALUE;
-
-        if(!wIt.SetWindIndex(windSpeed))
-            return Double.MAX_VALUE;
-
-        out[0] = wIt.GetWindIndex();
+        out.val = wIt.GetDescretWind();
 
         return BCPairsVecUtilities.InterpolateInNeighborhood(wIt, dist);
     }
@@ -125,6 +116,38 @@ public class GunSystemHolder
             return Double.MAX_VALUE;
 
         return BCPairsVecUtilities.InterpolateInNeighborhood(it, x);
+    }
+
+    public boolean GetVerticalSight(BCInteger sight, BCDouble disp, double distCalc, double distTrue)
+    {
+        if(distTrue < 1e-6 || distCalc < 1e-6)
+            return false;
+
+        OverstimationIt overIt = m_OverestimationTbl.GetOverestimationIt(distCalc);
+        if(overIt.GetCurrentItem() == null)
+            return false;
+
+        Double over = overIt.Get();
+        for(double tmp = Double.MAX_VALUE; overIt.GetCurrentItem() != null; overIt.StepForward(), over = overIt.Get()){
+
+            if(over == null || over == Double.MAX_VALUE)
+                continue;
+
+            if(Math.abs(over) > Math.abs(tmp)) {
+                overIt.StepBack();
+                over = tmp;
+                break;
+            }
+            tmp = over;
+        }
+
+        SightParams sp = overIt.GetCurrentItem();
+        if(sp == null)
+            return false;
+        sight.val = sp.first;
+        disp.val = (over * 1000.0)/distTrue;
+
+        return true;
     }
 
     private String              m_Name;
