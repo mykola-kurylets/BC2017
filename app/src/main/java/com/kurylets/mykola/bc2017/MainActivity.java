@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // android:id="@+id/main_container">
         //m_App.SetFragment(getFragmentManager(), R.id.main_container);
 
-//        тестування обрахунку вертикального прицілу і поправок НЕ СТИРАТИ!!!!!!!!!!!
+//        //тестування обрахунку вертикального прицілу і поправок НЕ СТИРАТИ!!!!!!!!!!!
 //        BCModule bcModule = new BCModule();
 //        boolean res = bcModule.GunSystemLoad("/data/data/com.kurylets.mykola.bc2017/bctables/SVD-PSO1.xml");
 //
@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
 //        OutputData outD = new OutputData();
 //
 //        inD.SetDistance(449.0);
-//        inD.SetTemperature(30.0);
-//        inD.SetPressure(650.0);
-//        inD.SetWindSpeed(10.0);
-//        inD.SetWindDirection(WindDirections.e180);
+//        inD.SetTemperature(15.0);
+//        inD.SetPressure(750.0);
+//        inD.SetWindSpeed(0.0);
+//        inD.SetWindDirection(WindDirections.e90);
 //
 //        res = bcModule.Calculate(inD, outD);
     }
