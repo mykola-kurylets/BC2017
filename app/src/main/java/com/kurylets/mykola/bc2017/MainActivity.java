@@ -13,10 +13,11 @@ import com.kurylets.mykola.bcmodule.WindDirections;
 import Application.Application;
 
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
 
         super.onCreateOptionsMenu(menu);
 
@@ -52,9 +54,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        m_App.Save();
     }
 
     private Application m_App;
