@@ -64,6 +64,16 @@ public class BCModule
         return m_GsHolder.GetNormalAirPressure();
     }
 
+    public double GetPriceDivision()
+    {
+        return m_GsHolder.GetPriceDivision();
+    }
+
+    public double GetPriceClick()
+    {
+        return m_GsHolder.GetPriceClick();
+    }
+
     private GunSystemHolder m_GsHolder;
     private LogicModule     m_LogMd;
 }

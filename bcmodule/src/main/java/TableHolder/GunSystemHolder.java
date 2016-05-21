@@ -3,6 +3,7 @@ package TableHolder;
 import Utilities.BCDouble;
 import Utilities.BCInteger;
 import Utilities.BCPairsVecUtilities;
+import Utilities.MathConstants;
 
 /**
  * Created by Mykola on 14.05.2016.
@@ -49,6 +50,16 @@ public class GunSystemHolder
     public Sight GetSight()
     {
         return m_SightProp;
+    }
+
+    public double GetPriceDivision()
+    {
+        return m_SightProp.m_PriceDivision;
+    }
+
+    public double GetPriceClick()
+    {
+        return m_SightProp.m_PriceClick;
     }
 
     public Normal GetNormal()
@@ -120,7 +131,7 @@ public class GunSystemHolder
 
     public boolean GetVerticalSight(BCInteger sight, BCDouble disp, double distCalc, double distTrue)
     {
-        if(distTrue < 1e-6 || distCalc < 1e-6)
+        if(distTrue < MathConstants.gePointDelta || distCalc < MathConstants.gePointDelta)
             return false;
 
         OverstimationIt overIt = m_OverestimationTbl.GetOverestimationIt(distCalc);
@@ -149,6 +160,7 @@ public class GunSystemHolder
 
         return true;
     }
+
 
     private String              m_Name;
     private GunsVec             m_Guns;
