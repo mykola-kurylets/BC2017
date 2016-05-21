@@ -2,7 +2,6 @@ package com.kurylets.mykola.bcmodule;
 
 import Logic.LogicModule;
 import TableHolder.GunSystemHolder;
-import TableHolder.Normal;
 import Utilities.BCDouble;
 import Utilities.BCInteger;
 
@@ -51,8 +50,6 @@ public class BCModule
     {
         return m_GsHolder.GetVerticalSight(sight, displacement, distCalc, distTrue);
     }
-
-    //public boolean GetHorizontalSight(Double, Double, double):
 
     public double GetNormalAirTemperature()
     {

@@ -29,19 +29,23 @@ public class LogicModule
         if(trueDist < MathConstants.gePointDelta)
             return false;
 
+        // отримати розрахункову відстань
         double calcDist = CalcDistanceCorrect(inD);
 
         BCInteger sightNum = new BCInteger();
         BCDouble displac = new BCDouble();
 
+        // отримати вертикальні поправки
         if(!CalcVerticalSight(sightNum, displac, calcDist, trueDist))
             return false;
 
         outD.SetVerticalSight(sightNum.val);
         outD.SetVerticalDeviation(displac.val);
 
+        // отримати зміщення на відстані
         double calcDir = CalcDirectionCorrect(inD);
 
+        // отримати горизонталні поправки
         BCString horSight = new BCString();
         if(!CalcHorizontalSight(horSight, displac, (calcDir * 1000.0) / trueDist))
             return false;

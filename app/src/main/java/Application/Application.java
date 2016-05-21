@@ -1,8 +1,13 @@
 package Application;
 
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 
 import com.kurylets.mykola.bc2017.MainActivity;
+import com.kurylets.mykola.bcmodule.BCModule;
+import com.kurylets.mykola.bcmodule.InputData;
+import com.kurylets.mykola.bcmodule.OutputData;
+
 import GUIManager.GUIManager;
 
 /**
@@ -12,8 +17,39 @@ public class Application
 {
     public Application(MainActivity mA)
     {
-        m_Owner = mA;
-        m_GUIManager = new GUIManager(this);
+        m_Owner         = mA;
+        m_GUIManager    = new GUIManager(this);
+        m_BCModule      = new BCModule();
+    }
+
+    public boolean Load()
+    {
+        return true;
+    }
+
+    public boolean GunSystemLoad(String filePath)
+    {
+        return m_BCModule.GunSystemLoad(filePath);
+    }
+
+    public GUIManager GetGUIManager()
+    {
+        return m_GUIManager;
+    }
+
+    public SharedPreferences GetPreferances(String preferencesName, int id)
+    {
+        return null;
+    }
+
+    public MainActivity GetActivity()
+    {
+        return m_Owner;
+    }
+
+    public boolean Calculate(InputData inD, OutputData outD)
+    {
+        return m_BCModule.Calculate(inD, outD);
     }
 
     public void SetFragment(FragmentManager fragM, int resId)
@@ -24,4 +60,5 @@ public class Application
     private MainActivity    m_Owner;
 
     private GUIManager      m_GUIManager;
+    private BCModule        m_BCModule;
 }
