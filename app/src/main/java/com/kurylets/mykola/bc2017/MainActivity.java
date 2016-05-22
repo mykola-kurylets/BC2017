@@ -1,5 +1,7 @@
 package com.kurylets.mykola.bc2017;
 
+
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -20,8 +22,11 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTheme(R.style.Theme_Day_Mode);
+
 
         m_App = new Application(this);
+        m_App.SetFragment(getFragmentManager(), R.id.main_container);
 
         // задання фрагрменту у головну активність
         // main_container - ідентифікатор activity_main.xml

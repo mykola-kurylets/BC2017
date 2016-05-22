@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?calculatorGeneralStyle"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/distance_input_name" />
+
+        <EditText
+            style="?calculatorEditTextStyle"
+            android:id="@+id/distance_value_id" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/temperature_input_name" />
+
+        <EditText
+            style="?calculatorEditTextStyle"
+            android:id="@+id/temperature_value_id" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/pressure_input_name" />
+
+        <EditText
+            style="?calculatorEditTextStyle"
+            android:id="@+id/pressure_value_id" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/speed_input_name" />
+
+        <EditText
+            style="?calculatorEditTextStyle"
+            android:id="@+id/speed_value_id"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/direction_input_name" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="?calculatorDividerStyle"
+        android:layout_width="match_parent"
+        android:layout_height="4dp">
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/vrtc_sight_output_name" />
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:id="@+id/vrtc_sight_id"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="@string/zero_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/vrtc_correction_output_name" />
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:id="@+id/vrtc_correction_id"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="@string/zero_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/hrst_sight_output_name" />
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:id="@+id/hrst_sight_id"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="@string/zero_value_string" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle">
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:text="@string/hrst_correction_output_name" />
+
+        <TextView
+            style="?calculatorTextStyle"
+            android:id="@+id/hrst_correction_id"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="@string/zero_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            style="?calculatorButtonStyle"
+            android:id="@+id/calculate_button"
+            android:text="@string/calculate" />
+
+    </LinearLayout>
+</LinearLayout>

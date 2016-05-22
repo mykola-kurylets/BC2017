@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="Theme.Day_Mode" parent="Theme.AppCompat.Light">
+        <item name="calculatorTextStyle">@style/DayModeTextView</item>
+        <item name="calculatorEditTextStyle">@style/DayModeEditText</item>
+        <item name="calculatorButtonStyle">@style/DayModeButton</item>
+        <item name="calculatorDividerStyle">@style/DayModeDivider</item>
+        <item name="calculatorGeneralStyle">@style/DayModeBackground</item>
+    </style>
+
+    <style name="Theme.Night_Mode" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="calculatorTextStyle">@style/NightModeTextView</item>
+        <item name="calculatorEditTextStyle">@style/NightModeEditText</item>
+        <item name="calculatorButtonStyle">@style/NightModeButton</item>
+        <item name="calculatorDividerStyle">@style/NightModeDivider</item>
+        <item name="calculatorGeneralStyle">@style/NightModeBackground</item>
+    </style>
+</resources>
