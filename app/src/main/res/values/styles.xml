@@ -49,7 +49,7 @@
         <item name="android:paddingBottom">@dimen/edittext_bottom_padding</item>
         <item name="android:paddingTop">@dimen/edittext_top_padding</item>
         <item name="android:paddingRight">@dimen/edittext_right_padding</item>
-        <item name="android:hint">"@string/zero_value"</item>
+        <item name="android:hint">@string/zero_value</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">right</item>
     </style>
