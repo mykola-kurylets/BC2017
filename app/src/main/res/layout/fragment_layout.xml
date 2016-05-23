@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="?calculatorGeneralStyle"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,6 +13,7 @@
 
         <EditText
             style="?calculatorEditTextStyle"
+            android:inputType="numberDecimal"
             android:id="@+id/distance_value_id" />
     </LinearLayout>
 
@@ -25,6 +26,7 @@
 
         <EditText
             style="?calculatorEditTextStyle"
+            android:inputType="number|numberDecimal|numberSigned"
             android:id="@+id/temperature_value_id" />
     </LinearLayout>
 
@@ -37,6 +39,7 @@
 
         <EditText
             style="?calculatorEditTextStyle"
+            android:inputType="numberDecimal"
             android:id="@+id/pressure_value_id" />
     </LinearLayout>
 
@@ -49,6 +52,7 @@
 
         <EditText
             style="?calculatorEditTextStyle"
+            android:inputType="numberDecimal"
             android:id="@+id/speed_value_id"/>
     </LinearLayout>
 
@@ -58,11 +62,19 @@
         <TextView
             style="?calculatorTextStyle"
             android:text="@string/direction_input_name" />
-
+        <Spinner
+            android:id="@+id/direction_id"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:entries="@array/direction" />
     </LinearLayout>
 
     <LinearLayout
         style="?calculatorDividerStyle"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="4dp">
     </LinearLayout>
@@ -77,6 +89,11 @@
         <TextView
             style="?calculatorTextStyle"
             android:id="@+id/vrtc_sight_id"
+            android:background="@drawable/night_edit_text_border"
+            android:paddingBottom="@dimen/edittext_bottom_padding"
+            android:paddingTop="@dimen/edittext_top_padding"
+            android:paddingRight="@dimen/edittext_right_padding"
+            android:layout_marginBottom="10dp"
             android:gravity="right"
             android:layout_weight="1"
             android:text="@string/zero_value" />
@@ -92,6 +109,11 @@
         <TextView
             style="?calculatorTextStyle"
             android:id="@+id/vrtc_correction_id"
+            android:background="@drawable/night_edit_text_border"
+            android:paddingBottom="@dimen/edittext_bottom_padding"
+            android:paddingTop="@dimen/edittext_top_padding"
+            android:paddingRight="@dimen/edittext_right_padding"
+            android:layout_marginBottom="10dp"
             android:gravity="right"
             android:layout_weight="1"
             android:text="@string/zero_value" />
@@ -107,6 +129,11 @@
         <TextView
             style="?calculatorTextStyle"
             android:id="@+id/hrst_sight_id"
+            android:background="@drawable/night_edit_text_border"
+            android:paddingBottom="@dimen/edittext_bottom_padding"
+            android:paddingTop="@dimen/edittext_top_padding"
+            android:paddingRight="@dimen/edittext_right_padding"
+            android:layout_marginBottom="10dp"
             android:gravity="right"
             android:layout_weight="1"
             android:text="@string/zero_value_string" />
@@ -122,18 +149,25 @@
         <TextView
             style="?calculatorTextStyle"
             android:id="@+id/hrst_correction_id"
+            android:background="@drawable/night_edit_text_border"
+            android:paddingBottom="@dimen/edittext_bottom_padding"
+            android:paddingTop="@dimen/edittext_top_padding"
+            android:paddingRight="@dimen/edittext_right_padding"
+            android:layout_marginBottom="10dp"
             android:gravity="right"
             android:layout_weight="1"
             android:text="@string/zero_value" />
     </LinearLayout>
 
     <LinearLayout
+        android:paddingRight="20dp"
         android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <Button
             style="?calculatorButtonStyle"
+            android:textAllCaps="false"
             android:id="@+id/calculate_button"
             android:text="@string/calculate" />
 

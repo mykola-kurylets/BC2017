@@ -1,17 +1,19 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+
+    <style name="ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/colorDayMode</item>
+    </style>
+
     <style name="DayModeBackground">
         <item name="android:background">@color/white</item>
     </style>
@@ -24,6 +26,8 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
     </style>
 
     <style name="CommonTextView">
@@ -49,6 +53,7 @@
         <item name="android:paddingBottom">@dimen/edittext_bottom_padding</item>
         <item name="android:paddingTop">@dimen/edittext_top_padding</item>
         <item name="android:paddingRight">@dimen/edittext_right_padding</item>
+        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:hint">@string/zero_value</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">right</item>
@@ -58,11 +63,13 @@
     <style name="DayModeEditText" parent="CommonEditText">
         <item name="android:background">@drawable/day_edit_text_border</item>
         <item name="android:textColor">@color/colorDayMode</item>
+        <item name="android:textColorHint">@color/colorDayMode</item>
     </style>
 
     <style name="NightModeEditText" parent="CommonEditText">
         <item name="android:background">@drawable/night_edit_text_border</item>
         <item name="android:textColor">@color/colorNightMode</item>
+        <item name="android:textColorHint">@color/colorNightMode</item>
     </style>
 
     <style name="DayModeDivider">
@@ -78,9 +85,12 @@
     </style>
 
     <style name="CommonButton">
+        <item name="android:textSize">@dimen/normal_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
     </style>
 
     <style name="DayModeButton" parent="CommonButton">

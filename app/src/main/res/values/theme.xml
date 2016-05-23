@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="Theme.Day_Mode" parent="Theme.AppCompat.Light">
+    <style name="Theme.Day_Mode" parent="AppTheme">
+        <item name="colorPrimary">@color/colorDayMode</item>
+        <item name="colorAccent">@color/colorDayMode</item>
+        <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="calculatorTextStyle">@style/DayModeTextView</item>
         <item name="calculatorEditTextStyle">@style/DayModeEditText</item>
         <item name="calculatorButtonStyle">@style/DayModeButton</item>
@@ -8,7 +11,9 @@
         <item name="calculatorGeneralStyle">@style/DayModeBackground</item>
     </style>
 
-    <style name="Theme.Night_Mode" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Night_Mode" parent="AppTheme">
+        <item name="colorPrimary">@color/colorNightMode</item>
+        <item name="colorAccent">@color/colorNightMode</item>
         <item name="calculatorTextStyle">@style/NightModeTextView</item>
         <item name="calculatorEditTextStyle">@style/NightModeEditText</item>
         <item name="calculatorButtonStyle">@style/NightModeButton</item>

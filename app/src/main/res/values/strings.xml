@@ -13,5 +13,15 @@
     <string name="zero_value">0.0</string>
     <string name="zero_value_string">0/0</string>
     <string name="calculate">Розрахувати</string>
-    <string name="day_mode_theme">Theme.Day_Mode</string>
+    <string-array name="direction">
+        <item>0</item>
+        <item>45</item>
+        <item>90</item>
+        <item>135</item>
+        <item>180</item>
+        <item>225</item>
+        <item>270</item>
+        <item>315</item>
+        <item>360</item>
+    </string-array>
 </resources>

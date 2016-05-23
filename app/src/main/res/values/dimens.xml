@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="main_top_padding">13dp</dimen>
     <dimen name="edittext_top_padding">5dp</dimen>
     <dimen name="edittext_bottom_padding">5dp</dimen>
     <dimen name="edittext_right_padding">4dp</dimen>

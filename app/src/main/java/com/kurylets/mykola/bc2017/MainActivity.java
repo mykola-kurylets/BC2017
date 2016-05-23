@@ -21,8 +21,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_Night_Mode);
         setContentView(R.layout.activity_main);
-        setTheme(R.style.Theme_Day_Mode);
+
 
 
         m_App = new Application(this);
