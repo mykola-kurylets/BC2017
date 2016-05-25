@@ -65,18 +65,14 @@
         <Spinner
             android:id="@+id/direction_id"
             android:layout_weight="1"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:entries="@array/direction" />
+            android:spinnerMode="dropdown" />
     </LinearLayout>
 
     <LinearLayout
-        style="?calculatorDividerStyle"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="4dp">
+        style="?calculatorDividerStyle">
     </LinearLayout>
 
     <LinearLayout
@@ -87,16 +83,9 @@
             android:text="@string/vrtc_sight_output_name" />
 
         <TextView
-            style="?calculatorTextStyle"
+            style="?calculatorTextOutValueStyle"
             android:id="@+id/vrtc_sight_id"
-            android:background="@drawable/night_edit_text_border"
-            android:paddingBottom="@dimen/edittext_bottom_padding"
-            android:paddingTop="@dimen/edittext_top_padding"
-            android:paddingRight="@dimen/edittext_right_padding"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:layout_weight="1"
-            android:text="@string/zero_value" />
+            android:text="@string/zero_value_integer" />
     </LinearLayout>
 
     <LinearLayout
@@ -107,16 +96,9 @@
             android:text="@string/vrtc_correction_output_name" />
 
         <TextView
-            style="?calculatorTextStyle"
+            style="?calculatorTextOutValueStyle"
             android:id="@+id/vrtc_correction_id"
-            android:background="@drawable/night_edit_text_border"
-            android:paddingBottom="@dimen/edittext_bottom_padding"
-            android:paddingTop="@dimen/edittext_top_padding"
-            android:paddingRight="@dimen/edittext_right_padding"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:layout_weight="1"
-            android:text="@string/zero_value" />
+            android:text="@string/zero_value_double" />
     </LinearLayout>
 
     <LinearLayout
@@ -127,15 +109,8 @@
             android:text="@string/hrst_sight_output_name" />
 
         <TextView
-            style="?calculatorTextStyle"
+            style="?calculatorTextOutValueStyle"
             android:id="@+id/hrst_sight_id"
-            android:background="@drawable/night_edit_text_border"
-            android:paddingBottom="@dimen/edittext_bottom_padding"
-            android:paddingTop="@dimen/edittext_top_padding"
-            android:paddingRight="@dimen/edittext_right_padding"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:layout_weight="1"
             android:text="@string/zero_value_string" />
     </LinearLayout>
 
@@ -147,20 +122,13 @@
             android:text="@string/hrst_correction_output_name" />
 
         <TextView
-            style="?calculatorTextStyle"
+            style="?calculatorTextOutValueStyle"
             android:id="@+id/hrst_correction_id"
-            android:background="@drawable/night_edit_text_border"
-            android:paddingBottom="@dimen/edittext_bottom_padding"
-            android:paddingTop="@dimen/edittext_top_padding"
-            android:paddingRight="@dimen/edittext_right_padding"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:layout_weight="1"
-            android:text="@string/zero_value" />
+            android:text="@string/zero_value_double" />
     </LinearLayout>
 
     <LinearLayout
-        android:paddingRight="20dp"
+        android:orientation="horizontal"
         android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

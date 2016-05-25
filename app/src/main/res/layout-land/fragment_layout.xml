@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/distance_input_name" />
+
+            <EditText
+                style="?calculatorEditTextStyle"
+                android:inputType="numberDecimal"
+                android:id="@+id/distance_value_id" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/temperature_input_name" />
+
+            <EditText
+                style="?calculatorEditTextStyle"
+                android:inputType="number|numberDecimal|numberSigned"
+                android:id="@+id/temperature_value_id" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/pressure_input_name" />
+
+            <EditText
+                style="?calculatorEditTextStyle"
+                android:inputType="numberDecimal"
+                android:id="@+id/pressure_value_id" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/speed_input_name" />
+
+            <EditText
+                style="?calculatorEditTextStyle"
+                android:inputType="numberDecimal"
+                android:id="@+id/speed_value_id"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/direction_input_name" />
+            <Spinner
+                android:id="@+id/direction_id"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="?calculatorDividerStyle">
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/vrtc_sight_output_name" />
+
+            <TextView
+                style="?calculatorTextOutValueStyle"
+                android:id="@+id/vrtc_sight_id"
+                android:text="@string/zero_value_integer" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/vrtc_correction_output_name" />
+
+            <TextView
+                style="?calculatorTextOutValueStyle"
+                android:id="@+id/vrtc_correction_id"
+                android:text="@string/zero_value_double" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/hrst_sight_output_name" />
+
+            <TextView
+                style="?calculatorTextOutValueStyle"
+                android:id="@+id/hrst_sight_id"
+                android:text="@string/zero_value_string" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                style="?calculatorTextStyle"
+                android:text="@string/hrst_correction_output_name" />
+
+            <TextView
+                style="?calculatorTextOutValueStyle"
+                android:id="@+id/hrst_correction_id"
+                android:text="@string/zero_value_double" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_gravity="right"
+            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="?calculatorButtonStyle"
+                android:textAllCaps="false"
+                android:id="@+id/calculate_button"
+                android:text="@string/calculate" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

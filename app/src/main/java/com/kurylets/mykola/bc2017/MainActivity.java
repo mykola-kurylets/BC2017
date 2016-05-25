@@ -2,12 +2,14 @@ package com.kurylets.mykola.bc2017;
 
 
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.kurylets.mykola.bcmodule.BCModule;
+
+
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
 import com.kurylets.mykola.bcmodule.WindDirections;
@@ -15,15 +17,15 @@ import com.kurylets.mykola.bcmodule.WindDirections;
 import Application.Application;
 
 
-public class MainActivity extends AppCompatActivity
-{
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_Night_Mode);
-        setContentView(R.layout.activity_main);
+public class MainActivity extends AppCompatActivity {
 
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_Day_Mode);
+        setContentView(R.layout.activity_main);
 
 
         m_App = new Application(this);
@@ -48,30 +50,29 @@ public class MainActivity extends AppCompatActivity
 //        inD.SetWindDirection(WindDirections.e90);
 //
 //        res = bcModule.Calculate(inD, outD);
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("daa");
+        menu.add("qwwq");
+        menu.add("as44");
         super.onCreateOptionsMenu(menu);
 
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-
+    public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+
     }
 
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        m_App.Save();
-    }
 
     private Application m_App;
+
+
+
+
 }

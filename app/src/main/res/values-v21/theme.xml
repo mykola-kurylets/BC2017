@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="Theme.Day_Mode" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+
+                <item name="colorAccent">@color/colorDayMode</item>
+                <item name="android:actionBarStyle">@style/ActionBar</item>
+                <item name="colorControlNormal">@color/colorDayMode</item>
+                <item name="calculatorTextStyle">@style/DayModeTextView</item>
+                <item name="calculatorTextOutValueStyle">@style/DayModeTextViewOutValue</item>
+                <item name="calculatorEditTextStyle">@style/DayModeEditText</item>
+                <item name="calculatorButtonStyle">@style/DayModeButton</item>
+                <item name="calculatorDividerStyle">@style/DayModeDivider</item>
+                <item name="calculatorGeneralStyle">@style/DayModeBackground</item>
+                <item name="android:colorPrimary">@color/colorDayMode</item>
+        </style>
+</resources>

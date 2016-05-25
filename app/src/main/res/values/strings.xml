@@ -7,21 +7,12 @@
     <string name="speed_input_name">Швидкість вітру, м/с :</string>
     <string name="direction_input_name">Напрямок вітру :</string>
     <string name="vrtc_sight_output_name">Вертикальний приціл, № :</string>
-    <string name="vrtc_correction_output_name">Зміщення ТП, т :</string>
+    <string name="vrtc_correction_output_name">Зміщення Т.П., т.д. :</string>
     <string name="hrst_sight_output_name">Горизонтальний приціл, № :</string>
-    <string name="hrst_correction_output_name">Зміщення ТП, т :</string>
-    <string name="zero_value">0.0</string>
+    <string name="hrst_correction_output_name">Зміщення Т.П., т.д. :</string>
+    <string name="zero_value_double">0.0</string>
+    <string name="zero_value_integer">0</string>
     <string name="zero_value_string">0/0</string>
     <string name="calculate">Розрахувати</string>
-    <string-array name="direction">
-        <item>0</item>
-        <item>45</item>
-        <item>90</item>
-        <item>135</item>
-        <item>180</item>
-        <item>225</item>
-        <item>270</item>
-        <item>315</item>
-        <item>360</item>
-    </string-array>
+
 </resources>

@@ -1,16 +1,23 @@
 package GUIManager.Fragment;
 
+
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.kurylets.mykola.bc2017.R;
 import com.kurylets.mykola.bcmodule.InputData;
@@ -19,8 +26,23 @@ import com.kurylets.mykola.bcmodule.OutputData;
 /**
  * Created by samsung on 20.05.2016.
  */
-public class CalculationFragment extends Fragment
+public class CalculationFragment extends Fragment implements AdapterView.OnItemSelectedListener
 {
+
+    int[] images = { R.mipmap.arrow_up, R.mipmap.arrow_up, R.mipmap.arrow_up,
+            R.mipmap.arrow_up, R.mipmap.arrow_up };
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+    }
+
 
     public  CalculationFragment()
     {
@@ -72,8 +94,8 @@ public class CalculationFragment extends Fragment
         if(m_FrListener == null )
             return false;
         GatherInputData();
-        if(!m_FrListener.OnCalculate(m_UserInput, m_UserOutput))
-           return false;
+//        if(!m_FrListener.OnCalculate(m_UserInput, m_UserOutput))
+//           return false;
         PutOutputData();
         return true;
     }
@@ -88,7 +110,13 @@ public class CalculationFragment extends Fragment
 
     private void PutOutputData()
     {
-
+        m_VertSightOutput.setText(String.valueOf(m_UserOutput.GetVerticalSight()));
+        m_VertErrorOutput.setText(String.valueOf(m_UserOutput.GetVerticalDeviation()));
+        String str = m_UserOutput.GetHorizontalSight();
+        if(str == null || str.isEmpty())
+            str = "Error";
+        m_HorSightOutput.setText(str);
+        m_HorErrorOutput.setText(String.valueOf(m_UserOutput.GetHorizontalDeviation()));
     }
 
     private String GetString(EditText userEdit )
@@ -114,7 +142,6 @@ public class CalculationFragment extends Fragment
 
     private void InitControls(View view)
     {
-
         m_DistanceInput = (EditText)view.findViewById(R.id.distance_value_id);
         m_TemperatureInput = (EditText)view.findViewById(R.id.temperature_value_id);
         m_PressureInput = (EditText)view.findViewById(R.id.pressure_value_id);
@@ -131,6 +158,10 @@ public class CalculationFragment extends Fragment
         m_PressureInput.setOnKeyListener(m_CalcEvent );
         m_WindSpeedInput.setOnKeyListener(m_CalcEvent );
         m_CalcButton.setOnClickListener(m_CalcEvent);
+        m_WindDirectionSelect.setOnItemSelectedListener(this);
+
+        WindDirectionAdapter customAdapter=new WindDirectionAdapter(getActivity().getApplicationContext(), images);
+        m_WindDirectionSelect.setAdapter(customAdapter);
     }
 
     private EditText m_DistanceInput;
@@ -150,3 +181,5 @@ public class CalculationFragment extends Fragment
 
     private ICalculationFragmentListener m_FrListener;
 }
+
+

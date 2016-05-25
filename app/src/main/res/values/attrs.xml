@@ -2,6 +2,7 @@
 <resources>
     <attr name="calculatorGeneralStyle" format="reference"/>
     <attr name="calculatorTextStyle" format="reference"/>
+    <attr name="calculatorTextOutValueStyle" format="reference"/>
     <attr name="calculatorEditTextStyle" format="reference"/>
     <attr name="calculatorButtonStyle" format="reference"/>
     <attr name="calculatorDividerStyle" format="reference"/>
