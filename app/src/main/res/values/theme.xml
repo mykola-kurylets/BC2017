@@ -16,7 +16,7 @@
     <style name="Theme.Night_Mode" parent="AppTheme">
         <item name="colorPrimary">@color/colorNightMode</item>
         <item name="colorAccent">@color/colorNightMode</item>
-
+        <item name="colorControlNormal">@color/colorNightMode</item>
         <item name="calculatorTextStyle">@style/NightModeTextView</item>
         <item name="calculatorTextOutValueStyle">@style/NightModeTextViewOutValue</item>
         <item name="calculatorEditTextStyle">@style/NightModeEditText</item>

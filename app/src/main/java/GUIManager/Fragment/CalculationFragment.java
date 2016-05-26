@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,8 +30,8 @@ import com.kurylets.mykola.bcmodule.OutputData;
 public class CalculationFragment extends Fragment implements AdapterView.OnItemSelectedListener
 {
 
-    int[] images = { R.mipmap.arrow_up, R.mipmap.arrow_up, R.mipmap.arrow_up,
-            R.mipmap.arrow_up, R.mipmap.arrow_up };
+    int[] images = { R.drawable.arrow0, R.drawable.arrow45,R.drawable.arrow90,
+            R.drawable.arrow135, R.drawable.arrow180,R.drawable.arrow225,R.drawable.arrow270,R.drawable.arrow315,};
 
 
     @Override
@@ -71,7 +72,7 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         public boolean OnCalculate(InputData inD, OutputData outD);
     }
 
-    public class  CalculationEvent implements View.OnClickListener, View.OnKeyListener
+    public class  CalculationEvent implements View.OnClickListener,  TextView.OnEditorActionListener
     {
         @Override
         public void onClick(View v)
@@ -80,32 +81,48 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         }
 
         @Override
-        public boolean onKey(View v, int keyCode, KeyEvent event)
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
         {
-            //TODO відфільтрувати непотрібні клавіші
-//            ExecudeCalculate();
+            if (actionId == EditorInfo.IME_ACTION_DONE)
+            {
+                ExecudeCalculate();
+            }
             return false;
         }
 
     }
+
+
+
+
 
     private boolean ExecudeCalculate()
     {
         if(m_FrListener == null )
             return false;
         GatherInputData();
+        OnCalc();
+
 //        if(!m_FrListener.OnCalculate(m_UserInput, m_UserOutput))
 //           return false;
         PutOutputData();
         return true;
     }
 
-    private void GatherInputData()
-    {
+    private void GatherInputData() {
         m_UserInput.SetDistance(GetDouble(m_DistanceInput));
         m_UserInput.SetTemperature(GetDouble(m_TemperatureInput));
         m_UserInput.SetPressure(GetDouble(m_PressureInput));
         m_UserInput.SetWindSpeed(GetDouble(m_WindSpeedInput));
+    }
+
+    private void OnCalc()
+    {
+        int diff = m_WindDirectionSelect.getSelectedItemPosition();
+        m_UserOutput.SetVerticalSight((int) m_UserInput.GetDistance() + diff);
+        m_UserOutput.SetVerticalDeviation((int) m_UserInput.GetTemperature() + diff);
+        m_UserOutput.SetHorizontalSight(String.valueOf(m_UserInput.GetPressure() + diff));
+        m_UserOutput.SetHorizontalDeviation((int) m_UserInput.GetWindSpeed() + diff);
     }
 
     private void PutOutputData()
@@ -153,10 +170,10 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         m_HorErrorOutput = (TextView)view.findViewById(R.id.hrst_correction_id);
         m_CalcButton = (Button)view.findViewById(R.id.calculate_button);
 
-        m_DistanceInput.setOnKeyListener(m_CalcEvent );
-        m_TemperatureInput.setOnKeyListener(m_CalcEvent );
-        m_PressureInput.setOnKeyListener(m_CalcEvent );
-        m_WindSpeedInput.setOnKeyListener(m_CalcEvent );
+        m_DistanceInput.setOnEditorActionListener(m_CalcEvent);
+        m_TemperatureInput.setOnEditorActionListener(m_CalcEvent);
+        m_PressureInput.setOnEditorActionListener(m_CalcEvent);
+        m_WindSpeedInput.setOnEditorActionListener(m_CalcEvent);
         m_CalcButton.setOnClickListener(m_CalcEvent);
         m_WindDirectionSelect.setOnItemSelectedListener(this);
 
