@@ -33,7 +33,7 @@ public class CalculatorMenu extends FragmentActivity {
 
 
 
-    public boolean OnCreateMenu(Menu menu)
+    public boolean CreateMenu(Menu menu)
     {
         menu.add(0, m_SelectModeId, 0, R.string.select_mode_text);
         menu.add(0,m_SelectSystemId, 1, R.string.select_system_text);
