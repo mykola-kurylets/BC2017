@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.kurylets.mykola.bc2017.R;
-import com.kurylets.mykola.bcmodule.WindDirections;
+
+import GUIManager.GUIManager;
 
 /**
  * Created by samsung on 25.05.2016.
@@ -53,4 +53,5 @@ public class WindDirectionAdapter extends BaseAdapter
     private Context context;
     private int direction[];
     private LayoutInflater inflater;
+
 }

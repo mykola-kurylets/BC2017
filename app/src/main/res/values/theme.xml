@@ -2,6 +2,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Theme.Day_Mode" parent="AppTheme">
+        <item name="android:itemBackground">@color/colorDayMode</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <item name="colorPrimary">@color/colorDayMode</item>
         <item name="colorAccent">@color/colorDayMode</item>
         <item name="colorControlNormal">@color/colorDayMode</item>
@@ -14,6 +16,8 @@
     </style>
 
     <style name="Theme.Night_Mode" parent="AppTheme">
+
+        <item name="android:textColorPrimary">@color/black</item>
         <item name="colorPrimary">@color/colorNightMode</item>
         <item name="colorAccent">@color/colorNightMode</item>
         <item name="colorControlNormal">@color/colorNightMode</item>
