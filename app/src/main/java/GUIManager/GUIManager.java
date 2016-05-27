@@ -27,9 +27,6 @@ public class GUIManager
 
     }
 
-
-
-
     public CalculatorMenu GetMenu()
     {
         return m_CalcMenu;

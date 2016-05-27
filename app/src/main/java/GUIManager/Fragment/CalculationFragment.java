@@ -7,33 +7,26 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.kurylets.mykola.bc2017.R;
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
+import com.kurylets.mykola.bcmodule.WindDirections;
 
 /**
  * Created by samsung on 20.05.2016.
  */
 public class CalculationFragment extends Fragment implements AdapterView.OnItemSelectedListener
 {
-
-    int[] images = { R.drawable.arrow0, R.drawable.arrow45,R.drawable.arrow90,
-            R.drawable.arrow135, R.drawable.arrow180,R.drawable.arrow225,R.drawable.arrow270,R.drawable.arrow315,};
-
-
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {
 
@@ -92,10 +85,6 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
 
     }
 
-
-
-
-
     private boolean ExecudeCalculate()
     {
         if(m_FrListener == null )
@@ -114,6 +103,36 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         m_UserInput.SetTemperature(GetDouble(m_TemperatureInput));
         m_UserInput.SetPressure(GetDouble(m_PressureInput));
         m_UserInput.SetWindSpeed(GetDouble(m_WindSpeedInput));
+
+        WindDirections wd = WindDirections.e0;
+        switch (m_WindDirectionSelect.getSelectedItemPosition())
+        {
+            case 0:
+                wd = WindDirections.e0;
+                break;
+            case 1:
+                wd = WindDirections.e45;
+                break;
+            case 2:
+                wd = WindDirections.e90;
+                break;
+            case 3:
+                wd = WindDirections.e135;
+                break;
+            case 4:
+                wd = WindDirections.e180;
+                break;
+            case 5:
+                wd = WindDirections.e225;
+                break;
+            case 6:
+                wd = WindDirections.e270;
+            case 7:
+                wd = WindDirections.e315;
+                break;
+        }
+
+        m_UserInput.SetWindDirection(wd);
     }
 
     private void OnCalc()
@@ -177,7 +196,7 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         m_CalcButton.setOnClickListener(m_CalcEvent);
         m_WindDirectionSelect.setOnItemSelectedListener(this);
 
-        WindDirectionAdapter customAdapter=new WindDirectionAdapter(getActivity().getApplicationContext(), images);
+        WindDirectionAdapter customAdapter=new WindDirectionAdapter(getActivity().getApplicationContext(), m_ArrowImages);
         m_WindDirectionSelect.setAdapter(customAdapter);
     }
 
@@ -197,6 +216,16 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
     private OutputData m_UserOutput;
 
     private ICalculationFragmentListener m_FrListener;
+
+    private int[] m_ArrowImages = { R.drawable.arrow0
+            , R.drawable.arrow45
+            , R.drawable.arrow90
+            , R.drawable.arrow135
+            , R.drawable.arrow180
+            , R.drawable.arrow225
+            , R.drawable.arrow270
+            , R.drawable.arrow315
+    };
 }
 
 
