@@ -1,6 +1,5 @@
 package GUIManager;
 
-import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
@@ -13,7 +12,6 @@ import Application.Application;
 import GUIManager.Dialog.SelectModeDialog;
 import GUIManager.Fragment.CalculationFragment;
 import GUIManager.Fragment.CalculationFragment.ICalculationFragmentListener;
-import GUIManager.Fragment.WindDirectionAdapter;
 
 /**
  * Created by Mykola on 17.05.2016.
@@ -23,9 +21,10 @@ public class GUIManager
     public GUIManager(Application app)
     {
         m_App = app;
-        m_CalcMenu = new CalculatorMenu(this, new MenuListener());
+        m_CalcMenu = new CalculatorMenu(new MenuListener());
         m_CalcFragment = new CalculationFragment(new CalculationFragmentListener());
-        m_ModeDialog = new SelectModeDialog(new SelectModeListener() );
+        m_ModeDialog = new SelectModeDialog();
+        m_ModeDialog.SetListener(new SelectModeListener());
 
     }
 
@@ -69,7 +68,7 @@ public class GUIManager
         @Override
        public void OnPossitive()
         {
-//            m_App.ChangeMode(int id);
+ //           m_App.ChangeMode(int id);
         }
     }
 
@@ -94,5 +93,5 @@ public class GUIManager
     private Application m_App;
     private CalculationFragment m_CalcFragment;
     private CalculatorMenu m_CalcMenu;
-    private  SelectModeDialog m_ModeDialog;
+    private SelectModeDialog m_ModeDialog;
 }
