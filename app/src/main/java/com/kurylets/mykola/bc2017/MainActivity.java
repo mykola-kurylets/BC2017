@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        m_App.GetGUIManager().GetMenu(). OnSelectItem(item);
+        m_App.GetGUIManager().GetMenu().OnSelectItem(item);
         return super.onOptionsItemSelected(item);
     }
 
