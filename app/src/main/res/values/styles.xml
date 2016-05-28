@@ -106,13 +106,13 @@
         <item name="android:textColorHint">@color/colorNightMode</item>
     </style>
 
-    <style name="SpinnerItemDay">
-        <item name="android:background">@color/colorDayMode</item>
-    </style>
+    <!--<style name="SpinnerItemDay">-->
+        <!--<item name="android:background">@color/white</item>-->
+    <!--</style>-->
 
-    <style name="SpinnerItemNight">
-        <item name="android:background">@color/colorNightMode</item>
-    </style>
+    <!--<style name="SpinnerItemNight">-->
+        <!--<item name="android:background">@color/black</item>-->
+    <!--</style>-->
 
     <style name="DayModeDivider">
         <item name="android:background">@color/colorDayMode</item>

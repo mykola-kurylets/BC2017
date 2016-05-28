@@ -11,6 +11,7 @@
         <item name="calculatorTextStyle">@style/DayModeTextView</item>
         <item name="calculatorTextOutValueStyle">@style/DayModeTextViewOutValue</item>
         <item name="calculatorEditTextStyle">@style/DayModeEditText</item>
+        <!--<item name="spinItemStyle">@style/SpinnerItemDay</item>-->
         <item name="calculatorButtonStyle">@style/DayModeButton</item>
         <item name="calculatorDividerStyle">@style/DayModeDivider</item>
         <item name="calculatorGeneralStyle">@style/DayModeBackground</item>
@@ -37,6 +38,7 @@
         <item name="calculatorTextStyle">@style/NightModeTextView</item>
         <item name="calculatorTextOutValueStyle">@style/NightModeTextViewOutValue</item>
         <item name="calculatorEditTextStyle">@style/NightModeEditText</item>
+        <!--<item name="SpinnerItemStyle">@style/SpinnerItemNight</item>-->
         <item name="calculatorButtonStyle">@style/NightModeButton</item>
         <item name="calculatorDividerStyle">@style/NightModeDivider</item>
         <item name="calculatorGeneralStyle">@style/NightModeBackground</item>
