@@ -16,21 +16,28 @@ import GUIManager.Dialog.SelectModeDialog;
 public class CalculatorMenu extends FragmentActivity {
     public CalculatorMenu()
     {
+        m_SelectModeId = 0;
+        m_SelectSystemId = 1;
+        m_SelectAboutId = 2;
+
         m_Gui = null;
         m_MenuLstnr = null;
     }
 
     public CalculatorMenu(GUIManager guiMng, IMenuListener mnListn)
     {
+        this();
         m_Gui = guiMng;
         m_MenuLstnr = mnListn;
     }
 
+
+
     public boolean CreateMenu(Menu menu)
     {
-        menu.add(0, m_SelectModeId, m_SelectModeId, R.string.select_mode_text);
-        menu.add(0, m_SelectSystemId, m_SelectSystemId, R.string.select_system_text);
-        menu.add(0, m_SelectAboutId, m_SelectAboutId, R.string.select_about_text);
+        menu.add(0, m_SelectModeId, 0, R.string.select_mode_text);
+        menu.add(0,m_SelectSystemId, 1, R.string.select_system_text);
+        menu.add(0,m_SelectAboutId, 2, R.string.select_about_text);
         return true;
     }
 
@@ -40,22 +47,26 @@ public class CalculatorMenu extends FragmentActivity {
             return false;
         int id = item.getItemId();
 
-        switch (id)
-        {
-            case m_SelectModeId:
-                m_MenuLstnr.ExecudeModeItem();
-                return true;
+        if (id == m_SelectModeId) {
+            m_MenuLstnr.ExecudeModeItem();
 
-            case m_SelectSystemId:
-                m_MenuLstnr.ExecudeSystemItem();
-                return true;
-
-            case m_SelectAboutId:
-                m_MenuLstnr.ExecudeAboutItem();
-                return true;
+            return true;
         }
+
+        if (id == m_SelectSystemId) {
+            m_MenuLstnr.ExecudeSystemItem();
+            return true;
+        }
+
+        if (id == m_SelectAboutId) {
+            m_MenuLstnr.ExecudeAboutItem();
+            return true;
+        }
+
         return  false;
     }
+
+
 
     public interface IMenuListener
     {
@@ -64,10 +75,10 @@ public class CalculatorMenu extends FragmentActivity {
         void ExecudeAboutItem();
     }
 
-    private final int m_SelectModeId = 0;
-    private final int m_SelectSystemId = 1;
-    private final int m_SelectAboutId = 2;
+    private int m_SelectModeId;
+    private int m_SelectSystemId;
+    private int m_SelectAboutId;
 
     private GUIManager m_Gui;
-    private IMenuListener m_MenuLstnr;
+    private  IMenuListener m_MenuLstnr;
 }

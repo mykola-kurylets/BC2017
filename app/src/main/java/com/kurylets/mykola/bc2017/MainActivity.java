@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         m_App = new Application(this);
-        m_App.Load();
+        m_App.SetFragment(getFragmentManager(), R.id.main_container);
 
         // задання фрагрменту у головну активність
         // main_container - ідентифікатор activity_main.xml
@@ -52,14 +52,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
-        return m_App.GetGUIManager().CreateMenu(menu);
+        m_App.GetGUIManager().GetMenu().CreateMenu(menu);
+
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        m_App.GetGUIManager().GetMenu().OnSelectItem(item);
+        m_App.GetGUIManager().GetMenu(). OnSelectItem(item);
         return super.onOptionsItemSelected(item);
+
     }
 
 

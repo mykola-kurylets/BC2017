@@ -5,77 +5,47 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.RadioButton;
 
 import com.kurylets.mykola.bc2017.R;
 
-
-public class SelectModeDialog extends DialogFragment implements DialogInterface.OnClickListener  {
-
-    public interface ISelectModeListener
-    {
-         void OnPossitive();
-    }
-
+/**
+ * Created by samsung on 27.05.2016.
+ */
+public class SelectModeDialog extends DialogFragment  {
 
     public SelectModeDialog() {
-        m_DialogBody = null;
-//        m_ModeListener = null;
-
         // Empty constructor required for DialogFragment
     }
 
-    public SelectModeDialog(ISelectModeListener sml) {
-        this();
-        m_ModeListener = sml;
-
-    }
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState)
-    {
-
-        m_DialogBody = getActivity().getLayoutInflater().inflate(R.layout.select_mode_dialog, null);
-        m_DayModeRadio = (RadioButton)m_DialogBody.findViewById(R.id.day_radio_id);
-        m_NightModeRadio = (RadioButton)m_DialogBody.findViewById(R.id.night_radio_id);
-
-        AlertDialog.Builder m_ModeDialogBuilder = new AlertDialog.Builder(getActivity());
-        m_ModeDialogBuilder.setView(m_DialogBody);
-
-        m_ModeDialogBuilder.setPositiveButton(m_Yes, this);
-        m_ModeDialogBuilder.setNegativeButton(m_Cancel, this);
-
-
-        return m_ModeDialogBuilder.create();
-    }
+//    public static SelectModeDialog newInstance(String title) {
+//        SelectModeDialog frag = new SelectModeDialog();
+//        Bundle args = new Bundle();
+//        args.putString("title", title);
+//        frag.setArguments(args);
+//        return frag;
+//    }
 
     @Override
-    public void onClick(DialogInterface dialog, int which)
-    {
-        if(m_ModeListener== null)
-            return;
-
-        switch (which)
-        {
-            case Dialog.BUTTON_POSITIVE:
-                m_ModeListener.OnPossitive();
-                break;
-            case Dialog.BUTTON_NEGATIVE:
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+//        String title = getArguments().getString("title");
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setTitle("title");
+        alertDialogBuilder.setMessage("Are you sure?");
+        alertDialogBuilder.setPositiveButton("OK",  new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // on success
+            }
+        });
+        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                break;
+            }
+        });
 
-        }
+        return alertDialogBuilder.create();
     }
-
-    private View m_DialogBody;
-    private ISelectModeListener m_ModeListener;
-
-    private RadioButton m_DayModeRadio;
-    private RadioButton m_NightModeRadio;
-
-    private final String m_Yes = getString(R.string.yes_text);
-    private final String m_Cancel = getString(R.string.cancel_text);
 
 
 }
