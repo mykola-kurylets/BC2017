@@ -1,28 +1,22 @@
 package GUIManager;
 
-import android.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kurylets.mykola.bc2017.R;
 
-import GUIManager.Dialog.SelectModeDialog;
-
 /**
  * Created by samsung on 27.05.2016.
  */
-public class CalculatorMenu extends FragmentActivity {
+public class CalculatorMenu
+{
     public CalculatorMenu()
     {
-        m_Gui = null;
         m_MenuLstnr = null;
     }
 
-    public CalculatorMenu(GUIManager guiMng, IMenuListener mnListn)
+    public CalculatorMenu(IMenuListener mnListn)
     {
-        m_Gui = guiMng;
         m_MenuLstnr = mnListn;
     }
 
@@ -68,6 +62,5 @@ public class CalculatorMenu extends FragmentActivity {
     private final int m_SelectSystemId = 1;
     private final int m_SelectAboutId = 2;
 
-    private GUIManager m_Gui;
     private IMenuListener m_MenuLstnr;
 }

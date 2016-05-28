@@ -11,25 +11,24 @@ import android.widget.RadioButton;
 import com.kurylets.mykola.bc2017.R;
 
 
-public class SelectModeDialog extends DialogFragment implements DialogInterface.OnClickListener  {
+public class SelectModeDialog extends DialogFragment implements DialogInterface.OnClickListener
+{
 
     public interface ISelectModeListener
     {
-         void OnPossitive();
+         public void OnPossitive();
     }
 
 
-    public SelectModeDialog() {
+    public SelectModeDialog()
+    {
         m_DialogBody = null;
-//        m_ModeListener = null;
-
-        // Empty constructor required for DialogFragment
+        m_ModeListener = null;
     }
 
-    public SelectModeDialog(ISelectModeListener sml) {
-        this();
+    public void SetListener(ISelectModeListener sml)
+    {
         m_ModeListener = sml;
-
     }
 
     @Override
@@ -74,8 +73,8 @@ public class SelectModeDialog extends DialogFragment implements DialogInterface.
     private RadioButton m_DayModeRadio;
     private RadioButton m_NightModeRadio;
 
-    private final String m_Yes = getString(R.string.yes_text);
-    private final String m_Cancel = getString(R.string.cancel_text);
+    private final String m_Yes = "Yes";//getString(R.string.yes_text);
+    private final String m_Cancel = "Cancel";//getString(R.string.cancel_text);
 
 
 }
