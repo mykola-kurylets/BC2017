@@ -90,10 +90,10 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         if(m_FrListener == null )
             return false;
         GatherInputData();
-        OnCalc();
 
-//        if(!m_FrListener.OnCalculate(m_UserInput, m_UserOutput))
-//           return false;
+        if(!m_FrListener.OnCalculate(m_UserInput, m_UserOutput))
+           return false;
+
         PutOutputData();
         return true;
     }
@@ -127,6 +127,7 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
                 break;
             case 6:
                 wd = WindDirections.e270;
+                break;
             case 7:
                 wd = WindDirections.e315;
                 break;
@@ -135,24 +136,15 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         m_UserInput.SetWindDirection(wd);
     }
 
-    private void OnCalc()
-    {
-        int diff = m_WindDirectionSelect.getSelectedItemPosition();
-        m_UserOutput.SetVerticalSight((int) m_UserInput.GetDistance() + diff);
-        m_UserOutput.SetVerticalDeviation((int) m_UserInput.GetTemperature() + diff);
-        m_UserOutput.SetHorizontalSight(String.valueOf(m_UserInput.GetPressure() + diff));
-        m_UserOutput.SetHorizontalDeviation((int) m_UserInput.GetWindSpeed() + diff);
-    }
-
     private void PutOutputData()
     {
         m_VertSightOutput.setText(String.valueOf(m_UserOutput.GetVerticalSight()));
-        m_VertErrorOutput.setText(String.valueOf(m_UserOutput.GetVerticalDeviation()));
+        m_VertErrorOutput.setText(String.format("%.2f", (Double) m_UserOutput.GetVerticalDeviation()));
         String str = m_UserOutput.GetHorizontalSight();
         if(str == null || str.isEmpty())
             str = "Error";
         m_HorSightOutput.setText(str);
-        m_HorErrorOutput.setText(String.valueOf(m_UserOutput.GetHorizontalDeviation()));
+        m_HorErrorOutput.setText(String.format("%.2f", (Double) m_UserOutput.GetHorizontalDeviation()));
     }
 
     private String GetString(EditText userEdit )
@@ -163,7 +155,7 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         if(input == null)
             return null;
         String str = input.toString();
-        if(str == null || str.length() == 0 )
+        if(str == null || str.isEmpty() )
             return null;
         return  str;
     }

@@ -22,7 +22,6 @@ public class CalculatorMenu extends FragmentActivity {
 
     public CalculatorMenu(GUIManager guiMng, IMenuListener mnListn)
     {
-        this();
         m_Gui = guiMng;
         m_MenuLstnr = mnListn;
     }

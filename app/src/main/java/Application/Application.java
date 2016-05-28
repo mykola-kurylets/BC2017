@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 import com.kurylets.mykola.bc2017.MainActivity;
+import com.kurylets.mykola.bc2017.R;
 import com.kurylets.mykola.bcmodule.BCModule;
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
@@ -36,6 +37,10 @@ public class Application
     {
         if(!m_Config.Load())
             return false;
+
+        SetFragment(m_Owner.getFragmentManager(), R.id.main_container);
+
+        StartApp();
 
         return true;
     }
@@ -82,13 +87,13 @@ public class Application
         GunSystemLoadCheck(folder, m_Config.GetGunSystemFileName());
     }
 
-    public void CopyFiles(String path)
+    public void CopyFilesFromAssets(String destenitionDir, String assetsSubDir)
     {
         AssetManager assetManager = m_Owner.getAssets();
         String[] files = null;
 
         try {
-            files = assetManager.list(m_Config.GetTablesFolderName());
+            files = assetManager.list(assetsSubDir);
         }
         catch (IOException e)
         {
@@ -101,8 +106,8 @@ public class Application
             InputStream in = null;
             OutputStream out = null;
             try {
-                in = assetManager.open(filename);
-                File outFile = new File(path, filename);
+                in = assetManager.open(assetsSubDir + "/" + filename);
+                File outFile = new File(destenitionDir, filename);
                 out = new FileOutputStream(outFile);
                 CopyFile(in, out);
             }
@@ -150,24 +155,39 @@ public class Application
         if(exFolderPath == null)
             return null;
 
-        String bcDirPath = exFolderPath + "/" + m_Config.GetTablesFolderName();
+        String bcDirName = m_Config.GetTablesFolderName();
+        String bcDirPath = exFolderPath + "/" + bcDirName;
         File bcTables = new File(bcDirPath);
 
-        if(bcTables.exists())
+       if(bcTables.exists())
             return bcTables.getAbsolutePath();
 
         bcTables.mkdir();
 
-        CopyFiles(bcDirPath);
+        CopyFilesFromAssets(bcDirPath, bcDirName);
 
         return bcDirPath;
     }
 
-    public boolean GunSystemLoadCheck(String folderPath, String filePath)
+    public void GunSystemLoadCheck(String folderPath, String filePath)
     {
-        return m_BCModule.GunSystemLoad(folderPath + "/" + "SVD-1974-PSO1.xml");
+        String file = filePath;
+        if(folderPath != null)
+            file = folderPath + "/" + "SVD-1974-PSO1.xml";
+
+        if(m_BCModule.GunSystemLoad(file))
+            return;
+
+        //m_GUIManager.ShowGunSystemFileDlg(IGunSystemFileDlgListener);
     }
 
+    public class GunSystemFileDlgExecuter
+    {
+        void ExecudeOk(String filePath)
+        {
+            GunSystemLoadCheck(null, filePath);
+        }
+    }
 
     private MainActivity            m_Owner;
 

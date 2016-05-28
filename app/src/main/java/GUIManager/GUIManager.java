@@ -24,7 +24,6 @@ public class GUIManager
         m_App = app;
         m_CalcMenu = new CalculatorMenu(this, new MenuListener());
         m_CalcFragment = new CalculationFragment(new CalculationFragmentListener() );
-
     }
 
     public CalculatorMenu GetMenu()
@@ -34,7 +33,6 @@ public class GUIManager
 
     class CalculationFragmentListener implements ICalculationFragmentListener
     {
-
         public boolean OnCalculate(InputData InD, OutputData OutD)
          {
             return m_App.Calculate(InD, OutD );
@@ -63,12 +61,9 @@ public class GUIManager
 
     }
 
-
-
     public boolean CreateMenu(Menu menu)
     {
-
-        return true;
+        return m_CalcMenu.CreateMenu(menu);
     }
 
 //     установка фрагменту

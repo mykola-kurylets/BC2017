@@ -20,20 +20,9 @@ public class ComfigurationManager
     {
         m_App = app;
         m_SystemFileName = m_UnDefined;
-        m_TablesFolderPath = m_UnDefined;
     }
 
     public static final String m_UnDefined = "?";
-
-    public String GetTablesFolderPath()
-    {
-        return m_TablesFolderPath;
-    }
-
-    public void SetTablesFolderPath(String path)
-    {
-        m_TablesFolderPath = path;
-    }
 
     public String GetGunSystemFileName()
     {
@@ -81,8 +70,6 @@ public class ComfigurationManager
         SharedPreferences.Editor prefEditor = gPref.edit();
         prefEditor.clear();
 
-        // зберігаємо шлях до папки з таблицями
-        prefEditor.putString(m_TablesTagName, m_TablesFolderPath);
         // зберігаємо імя файлу останньої вибраної системи
         prefEditor.putString(m_SystemFileTagName, m_SystemFileName);
         // записуємо на диск
@@ -117,8 +104,6 @@ public class ComfigurationManager
 
     private boolean LoadGeneralPreferences(SharedPreferences gPref)
     {
-        // читаємо шлях до папки з файлами систем
-        m_TablesFolderPath = gPref.getString(m_TablesTagName, m_UnDefined);
         // читаємо імя останньо вибраної системи
         m_SystemFileName = gPref.getString(m_SystemFileTagName, m_UnDefined);
 
@@ -149,11 +134,9 @@ public class ComfigurationManager
 
     private Application m_App;
 
-    private final String m_TablesTagName        = "tables";
     private final String m_SystemFileTagName    = "system-file";
     private final String m_TablesFolderName     = "bctables";
     private final String m_GeneralPrefTagName   = "bc2017-general-pref";
 
-    private String m_TablesFolderPath;
     private String m_SystemFileName;
 }
