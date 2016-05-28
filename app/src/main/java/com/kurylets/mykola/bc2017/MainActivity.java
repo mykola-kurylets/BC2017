@@ -6,13 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import Application.Application;
 
-
-public class MainActivity extends AppCompatActivity {
-
-
+public class MainActivity extends AppCompatActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         m_App = new Application(this);
-        m_App.SetFragment(getFragmentManager(), R.id.main_container);
+        m_App.Load();
 
         // задання фрагрменту у головну активність
         // main_container - ідентифікатор activity_main.xml
@@ -46,29 +43,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
-        m_App.GetGUIManager().GetMenu().CreateMenu(menu);
-
-        return true;
+        return m_App.GetGUIManager().CreateMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        m_App.GetGUIManager().GetMenu(). OnSelectItem(item);
+        m_App.GetGUIManager().GetMenu().OnSelectItem(item);
         return super.onOptionsItemSelected(item);
-
     }
 
-
     private Application m_App;
-
-
-
-
 }
