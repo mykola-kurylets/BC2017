@@ -3,7 +3,7 @@ package Application;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
-import android.util.Log;
+import android.content.res.Configuration;
 
 import com.kurylets.mykola.bc2017.MainActivity;
 import com.kurylets.mykola.bc2017.R;
@@ -172,7 +172,7 @@ public class Application
     public void GunSystemLoadCheck(String folderPath, String filePath)
     {
         String file = filePath;
-        if(folderPath != null)
+        if(folderPath != null && file.equalsIgnoreCase(ComfigurationManager.m_UnDefined))
             file = folderPath + "/" + "SVD-1974-PSO1.xml";
 
         if(m_BCModule.GunSystemLoad(file))
