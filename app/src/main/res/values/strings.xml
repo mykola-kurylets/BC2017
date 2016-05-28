@@ -13,8 +13,13 @@
     <string name="zero_value_double">0.0</string>
     <string name="zero_value_integer">0</string>
     <string name="zero_value_string">0/0</string>
+    <string name="error_text">Помилка</string>
     <string name="calculate">Розрахувати</string>
     <string name="select_mode_text">Вибір режиму</string>
+    <string name="night_mode_name">Нічний режим</string>
+    <string name="day_mode_name">Денний режим</string>
+    <string name="yes_text">Так</string>
+    <string name="cancel_text">Відміна</string>
     <string name="select_system_text">Вибір системи</string>
     <string name="select_about_text">Про програму</string>
 </resources>

@@ -142,7 +142,7 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         m_VertErrorOutput.setText(String.format("%.2f", (Double) m_UserOutput.GetVerticalDeviation()));
         String str = m_UserOutput.GetHorizontalSight();
         if(str == null || str.isEmpty())
-            str = "Error";
+            str =  getString(R.string.error_text);
         m_HorSightOutput.setText(str);
         m_HorErrorOutput.setText(String.format("%.2f", (Double) m_UserOutput.GetHorizontalDeviation()));
     }

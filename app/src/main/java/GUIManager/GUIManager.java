@@ -1,5 +1,6 @@
 package GUIManager;
 
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
@@ -23,7 +24,9 @@ public class GUIManager
     {
         m_App = app;
         m_CalcMenu = new CalculatorMenu(this, new MenuListener());
-        m_CalcFragment = new CalculationFragment(new CalculationFragmentListener() );
+        m_CalcFragment = new CalculationFragment(new CalculationFragmentListener());
+        m_ModeDialog = new SelectModeDialog(new SelectModeListener() );
+
     }
 
     public CalculatorMenu GetMenu()
@@ -33,6 +36,7 @@ public class GUIManager
 
     class CalculationFragmentListener implements ICalculationFragmentListener
     {
+
         public boolean OnCalculate(InputData InD, OutputData OutD)
          {
             return m_App.Calculate(InD, OutD );
@@ -44,7 +48,7 @@ public class GUIManager
         @Override
         public void ExecudeModeItem()
         {
-
+            ShowSelectModeDialog();
         }
 
         @Override
@@ -58,12 +62,25 @@ public class GUIManager
         {
 
         }
+    }
 
+    class SelectModeListener implements SelectModeDialog.ISelectModeListener
+    {
+        @Override
+       public void OnPossitive()
+        {
+//            m_App.ChangeMode(int id);
+        }
+    }
+
+    public void ShowSelectModeDialog()
+    {
+        m_ModeDialog.show(m_CalcFragment.getFragmentManager(), "ModeDialog");
     }
 
     public boolean CreateMenu(Menu menu)
     {
-        return m_CalcMenu.CreateMenu(menu);
+        return  m_CalcMenu.CreateMenu(menu);
     }
 
 //     установка фрагменту
@@ -77,4 +94,5 @@ public class GUIManager
     private Application m_App;
     private CalculationFragment m_CalcFragment;
     private CalculatorMenu m_CalcMenu;
+    private  SelectModeDialog m_ModeDialog;
 }
