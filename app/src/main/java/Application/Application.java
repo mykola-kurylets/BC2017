@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import Configuration.ComfigurationManager;
+import GUIManager.Dialog.GunSystemFileDlg;
 import GUIManager.GUIManager;
 
 /**
@@ -31,6 +32,7 @@ public class Application
         m_GUIManager    = new GUIManager(this);
         m_BCModule      = new BCModule();
         m_Config        = new ComfigurationManager(this);
+        m_DlgExecuter   = new GunSystemFileDlgExecuter();
     }
 
     public boolean Load()
@@ -178,20 +180,23 @@ public class Application
         if(m_BCModule.GunSystemLoad(file))
             return;
 
-        //m_GUIManager.ShowGunSystemFileDlg(IGunSystemFileDlgListener);
+        String startFolder = null;
+       // m_GUIManager.ShowGunSystemFileDlg(m_DlgExecuter, startFolder);
     }
 
-    public class GunSystemFileDlgExecuter
+    public class GunSystemFileDlgExecuter implements GunSystemFileDlg.IGunSystemFileDlgListener
     {
-        void ExecudeOk(String filePath)
+        @Override
+        public void SetFile(String path)
         {
-            GunSystemLoadCheck(null, filePath);
+            GunSystemLoadCheck(null, path);
         }
     }
 
-    private MainActivity            m_Owner;
+    private MainActivity                m_Owner;
 
-    private GUIManager              m_GUIManager;
-    private BCModule                m_BCModule;
-    private ComfigurationManager    m_Config;
+    private GUIManager                  m_GUIManager;
+    private BCModule                    m_BCModule;
+    private ComfigurationManager        m_Config;
+    private GunSystemFileDlgExecuter    m_DlgExecuter;
 }
