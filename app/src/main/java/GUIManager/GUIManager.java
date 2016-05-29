@@ -5,14 +5,20 @@ import android.app.FragmentTransaction;
 
 import android.view.Menu;
 
+import com.kurylets.mykola.bc2017.MainActivity;
+import com.kurylets.mykola.bc2017.R;
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
+
+import java.util.Map;
+import java.util.Set;
 
 import Application.Application;
 import GUIManager.Dialog.GunSystemFileDlg;
 import GUIManager.Dialog.SelectModeDialog;
 import GUIManager.Fragment.CalculationFragment;
 import GUIManager.Fragment.CalculationFragment.ICalculationFragmentListener;
+import Utilities.StringsMap;
 
 
 public class GUIManager
@@ -25,6 +31,7 @@ public class GUIManager
         m_ModeDialog = new SelectModeDialog();
         m_ModeDialog.SetListener(new SelectModeListener());
         m_ChoseGunSystemDlg = new GunSystemFileDlg();
+        m_CurrentMode = MainActivity.m_DayModeTheme;
     }
 
     public CalculatorMenu GetMenu()
@@ -70,17 +77,19 @@ public class GUIManager
         @Override
        public void OnPossitive()
         {
-            if (m_CurrentMode != m_ModeDialog.GetMode())
-            {
-                m_CurrentMode = m_ModeDialog.GetMode();
-                m_App.ChangeMode(m_CurrentMode);
-            }
+            if (m_CurrentMode == m_ModeDialog.GetMode())
+                return;
+            m_CurrentMode = m_ModeDialog.GetMode();
+            m_App.ChangeMode();
+
         }
     }
 
+
+
+
     public void ShowSelectModeDialog()
     {
-        m_CurrentMode = Application.GetTheme();
         m_ModeDialog.SetMode(m_CurrentMode);
         m_ModeDialog.show(m_CalcFragment.getFragmentManager(), "ModeDialog");
     }
@@ -106,11 +115,48 @@ public class GUIManager
         fragT.commit();
     }
 
+
+    public boolean SetPreferences(StringsMap preference)
+    {
+        if (preference == null)
+            return false;
+        String mode = preference.get(m_ModeName);
+         if ( mode != null && !mode.isEmpty())
+             m_CurrentMode = Integer.parseInt(mode);
+        m_CalcFragment.SetPreference(preference);
+
+        return true;
+    }
+
+
+    public boolean GetPreferences(StringsMap preference )
+    {
+
+        if(preference == null)
+            return false;
+
+        preference.clear();
+        preference.put(m_ModeName, String.valueOf(m_CurrentMode));
+        m_CalcFragment.GetPreferences(preference);
+
+        return true;
+    }
+
+
+
+    public String GetPreferenceName()
+    {
+        return "bc-2017-gui-pref";
+    }
+
     private Application         m_App;
     private CalculationFragment m_CalcFragment;
     private CalculatorMenu      m_CalcMenu;
     private SelectModeDialog    m_ModeDialog;
     private GunSystemFileDlg    m_ChoseGunSystemDlg;
     private int                 m_CurrentMode;
+
+    private static final String  m_ModeName = "cur-mode-name";
+
 
 }

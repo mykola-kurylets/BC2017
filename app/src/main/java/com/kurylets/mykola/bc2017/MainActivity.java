@@ -14,13 +14,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Application.SelectTheme(this);
+        m_App = new Application(this);
+        SelectTheme(m_App.GetCurrentMode());
 
 //        setTheme(R.style.Theme_Night_Mode);
         setContentView(R.layout.activity_main);
 
 
-        m_App = new Application(this);
+
         m_App.Load();
 
         // задання фрагрменту у головну активність
@@ -60,10 +61,25 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public  void SelectTheme(int theme ){
+        switch (theme)
+        {
+            case m_DayModeTheme:
+                setTheme(R.style.Theme_Day_Mode);
+                break;
+            case m_NightMode:
+                setTheme(R.style.Theme_Night_Mode);
+                break;
+            default:
+                setTheme(R.style.Theme_Day_Mode);
+        }
+    }
 
 
 
 
     private Application m_App;
+    public final static int    m_DayModeTheme = 0;
+    public final static int    m_NightMode = 1;
 
 }

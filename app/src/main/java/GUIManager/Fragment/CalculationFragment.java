@@ -22,6 +22,8 @@ import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
 import com.kurylets.mykola.bcmodule.WindDirections;
 
+import Utilities.StringsMap;
+
 
 public class CalculationFragment extends Fragment implements AdapterView.OnItemSelectedListener
 {
@@ -166,6 +168,38 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         return Double.parseDouble(str);
     }
 
+    public void GetPreferences(StringsMap preference)
+    {
+        preference.put(m_DistanceControlsName,     GetString(m_DistanceInput) );
+        preference.put(m_TemperatureControlsName,   GetString(m_TemperatureInput));
+        preference.put(m_PressureControlsName, GetString(m_PressureInput) );
+        preference.put(m_SpeedControlsName, GetString(m_WindSpeedInput) );
+        preference.put(m_DirectionControlsName, String.valueOf(m_WindDirectionSelect.getSelectedItemPosition()) );
+    }
+
+    public void SetPreference(StringsMap preference)
+    {
+        String strVal = preference.get(m_DistanceControlsName);
+        if ( strVal != null && !strVal.isEmpty())
+            m_DistanceInput.setText(strVal);
+
+        strVal = preference.get(m_TemperatureControlsName);
+        if ( strVal != null && !strVal.isEmpty())
+            m_TemperatureInput.setText(strVal);
+
+        strVal = preference.get(m_PressureControlsName);
+        if ( strVal != null && !strVal.isEmpty())
+            m_PressureInput.setText(strVal);
+
+        strVal = preference.get(m_SpeedControlsName);
+        if ( strVal != null && !strVal.isEmpty())
+            m_WindSpeedInput.setText(strVal);
+
+        strVal = preference.get(m_DirectionControlsName);
+        if ( strVal != null && !strVal.isEmpty())
+            m_WindDirectionSelect.setSelection(Integer.parseInt(strVal));
+    }
+
     private void InitControls(View view)
     {
         m_DistanceInput = (EditText)view.findViewById(R.id.distance_value_id);
@@ -206,6 +240,12 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
     private OutputData                   m_UserOutput;
 
     private ICalculationFragmentListener m_FrListener;
+
+    public final static String          m_DistanceControlsName = "DistanceValue";
+    public final static String          m_TemperatureControlsName = "TemperatureValue";
+    public final static String          m_PressureControlsName = "PressureValue";
+    public final static String          m_SpeedControlsName = "SpeedValue";
+    public final static String          m_DirectionControlsName = "DirectionValue";
 
     private int[] m_ArrowImages = { R.drawable.arrow0
             , R.drawable.arrow45
