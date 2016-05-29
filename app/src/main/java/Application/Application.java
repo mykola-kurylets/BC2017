@@ -22,9 +22,7 @@ import Configuration.ComfigurationManager;
 import GUIManager.Dialog.GunSystemFileDlg;
 import GUIManager.GUIManager;
 
-/**
- * Created by Mykola on 17.05.2016.
- */
+
 public class Application
 {
     public Application(MainActivity mA)
