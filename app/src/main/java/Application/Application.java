@@ -1,6 +1,7 @@
 package Application;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
@@ -46,6 +47,39 @@ public class Application
 
         return true;
     }
+
+
+//    для зміни режиму необхідно перезапустити програму
+   public void ChangeMode(int id)
+   {
+       m_CurrentTheme = id;
+       m_Owner.finish();
+       m_Owner.startActivity(new Intent(m_Owner, m_Owner.getClass()));
+       m_Owner.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+   }
+
+//    загрузка вибраної теми
+    public static void SelectTheme(MainActivity activity ){
+        int theme = m_CurrentTheme;
+        switch (theme)
+        {
+            case DAY_MODE_THEME :
+                activity.setTheme(R.style.Theme_Day_Mode);
+                break;
+            case NIGHT_MODE_THEME :
+                activity.setTheme(R.style.Theme_Night_Mode);
+                break;
+            default:
+                activity.setTheme(R.style.Theme_Day_Mode);
+                break;
+        }
+    }
+
+    public static int GetTheme()
+    {
+        return Application.m_CurrentTheme;
+    }
+
 
     public boolean Save()
     {
@@ -199,4 +233,11 @@ public class Application
     private BCModule                    m_BCModule;
     private ComfigurationManager        m_Config;
     private GunSystemFileDlgExecuter    m_DlgExecuter;
+
+    private static int                  m_CurrentTheme ;
+    private final static int            DAY_MODE_THEME = 0;
+    private final static int            NIGHT_MODE_THEME = 1;
+
+
 }
+

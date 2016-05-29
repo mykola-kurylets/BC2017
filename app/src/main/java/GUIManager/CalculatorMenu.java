@@ -58,9 +58,9 @@ public class CalculatorMenu
         void ExecudeAboutItem();
     }
 
-    private final int m_SelectModeId = 0;
-    private final int m_SelectSystemId = 1;
-    private final int m_SelectAboutId = 2;
+    private final int      m_SelectModeId = 0;
+    private final int      m_SelectSystemId = 1;
+    private final int      m_SelectAboutId = 2;
 
-    private IMenuListener m_MenuLstnr;
+    private IMenuListener  m_MenuLstnr;
 }

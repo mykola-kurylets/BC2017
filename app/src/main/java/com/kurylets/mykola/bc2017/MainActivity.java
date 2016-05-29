@@ -14,7 +14,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_Night_Mode);
+        Application.SelectTheme(this);
+
+//        setTheme(R.style.Theme_Night_Mode);
         setContentView(R.layout.activity_main);
 
 
@@ -57,5 +59,11 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
+
+
     private Application m_App;
+
 }

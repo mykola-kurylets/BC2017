@@ -22,9 +22,7 @@ import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
 import com.kurylets.mykola.bcmodule.WindDirections;
 
-/**
- * Created by samsung on 20.05.2016.
- */
+
 public class CalculationFragment extends Fragment implements AdapterView.OnItemSelectedListener
 {
     @Override
@@ -62,7 +60,7 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
 
     public interface ICalculationFragmentListener
     {
-        public boolean OnCalculate(InputData inD, OutputData outD);
+         boolean OnCalculate(InputData inD, OutputData outD);
     }
 
     public class  CalculationEvent implements View.OnClickListener,  TextView.OnEditorActionListener
@@ -192,20 +190,20 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         m_WindDirectionSelect.setAdapter(customAdapter);
     }
 
-    private EditText m_DistanceInput;
-    private EditText m_TemperatureInput;
-    private EditText m_PressureInput;
-    private EditText m_WindSpeedInput;
-    private Spinner m_WindDirectionSelect;
-    private TextView m_VertSightOutput;
-    private TextView m_VertErrorOutput;
-    private TextView m_HorSightOutput;
-    private TextView m_HorErrorOutput;
-    private Button m_CalcButton;
-    private CalculationEvent m_CalcEvent;
+    private EditText                     m_DistanceInput;
+    private EditText                     m_TemperatureInput;
+    private EditText                     m_PressureInput;
+    private EditText                     m_WindSpeedInput;
+    private Spinner                      m_WindDirectionSelect;
+    private TextView                     m_VertSightOutput;
+    private TextView                     m_VertErrorOutput;
+    private TextView                     m_HorSightOutput;
+    private TextView                     m_HorErrorOutput;
+    private Button                       m_CalcButton;
+    private CalculationEvent             m_CalcEvent;
 
-    private InputData m_UserInput;
-    private OutputData m_UserOutput;
+    private InputData                    m_UserInput;
+    private OutputData                   m_UserOutput;
 
     private ICalculationFragmentListener m_FrListener;
 

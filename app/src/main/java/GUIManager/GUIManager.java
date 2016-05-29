@@ -14,9 +14,7 @@ import GUIManager.Dialog.SelectModeDialog;
 import GUIManager.Fragment.CalculationFragment;
 import GUIManager.Fragment.CalculationFragment.ICalculationFragmentListener;
 
-/**
- * Created by Mykola on 17.05.2016.
- */
+
 public class GUIManager
 {
     public GUIManager(Application app)
@@ -26,7 +24,6 @@ public class GUIManager
         m_CalcFragment = new CalculationFragment(new CalculationFragmentListener());
         m_ModeDialog = new SelectModeDialog();
         m_ModeDialog.SetListener(new SelectModeListener());
-
         m_ChoseGunSystemDlg = new GunSystemFileDlg();
     }
 
@@ -34,6 +31,9 @@ public class GUIManager
     {
         return m_CalcMenu;
     }
+
+    public int GetCurrentMode(){ return m_CurrentMode; }
+    public void SetCurrentMode(int mode){m_CurrentMode = mode; }
 
     class CalculationFragmentListener implements ICalculationFragmentListener
     {
@@ -70,12 +70,18 @@ public class GUIManager
         @Override
        public void OnPossitive()
         {
- //           m_App.ChangeMode(int id);
+            if (m_CurrentMode != m_ModeDialog.GetMode())
+            {
+                m_CurrentMode = m_ModeDialog.GetMode();
+                m_App.ChangeMode(m_CurrentMode);
+            }
         }
     }
 
     public void ShowSelectModeDialog()
     {
+        m_CurrentMode = Application.GetTheme();
+        m_ModeDialog.SetMode(m_CurrentMode);
         m_ModeDialog.show(m_CalcFragment.getFragmentManager(), "ModeDialog");
     }
 
@@ -105,4 +111,6 @@ public class GUIManager
     private CalculatorMenu      m_CalcMenu;
     private SelectModeDialog    m_ModeDialog;
     private GunSystemFileDlg    m_ChoseGunSystemDlg;
+    private int                 m_CurrentMode;
+
 }
