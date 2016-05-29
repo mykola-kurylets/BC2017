@@ -63,12 +63,8 @@
             style="?calculatorTextStyle"
             android:text="@string/direction_input_name" />
         <Spinner
-            android:id="@+id/direction_id"
-            android:layout_weight="1"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown" />
+            style="?calculatorSpinnerStyle"
+            android:id="@+id/direction_id" />
     </LinearLayout>
 
     <LinearLayout

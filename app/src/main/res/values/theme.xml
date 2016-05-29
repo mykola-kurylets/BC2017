@@ -7,11 +7,10 @@
         <item name="colorPrimary">@color/colorDayMode</item>
         <item name="colorAccent">@color/colorDayMode</item>
         <item name="colorControlNormal">@color/colorDayMode</item>
-
         <item name="calculatorTextStyle">@style/DayModeTextView</item>
         <item name="calculatorTextOutValueStyle">@style/DayModeTextViewOutValue</item>
         <item name="calculatorEditTextStyle">@style/DayModeEditText</item>
-        <!--<item name="spinItemStyle">@style/SpinnerItemDay</item>-->
+        <item name="calculatorSpinnerStyle">@style/DayModeSpinner</item>
         <item name="calculatorButtonStyle">@style/DayModeButton</item>
         <item name="calculatorDividerStyle">@style/DayModeDivider</item>
         <item name="calculatorGeneralStyle">@style/DayModeBackground</item>
@@ -30,15 +29,15 @@
 
 
     <style name="Theme.Night_Mode" parent="AppTheme">
-        <item name="android:itemBackground">@color/colorNightMode</item>
-        <item name="android:textColorPrimary">@color/black</item>
-        <item name="colorPrimary">@color/colorNightMode</item>
+        <item name="android:itemBackground">@color/black</item>
+        <item name="android:textColorPrimary">@color/colorNightMode</item>
+        <item name="colorPrimary">@color/black</item>
         <item name="colorAccent">@color/colorNightMode</item>
         <item name="colorControlNormal">@color/colorNightMode</item>
         <item name="calculatorTextStyle">@style/NightModeTextView</item>
         <item name="calculatorTextOutValueStyle">@style/NightModeTextViewOutValue</item>
         <item name="calculatorEditTextStyle">@style/NightModeEditText</item>
-        <!--<item name="SpinnerItemStyle">@style/SpinnerItemNight</item>-->
+        <item name="calculatorSpinnerStyle">@style/NightModeSpinner</item>
         <item name="calculatorButtonStyle">@style/NightModeButton</item>
         <item name="calculatorDividerStyle">@style/NightModeDivider</item>
         <item name="calculatorGeneralStyle">@style/NightModeBackground</item>

@@ -4,7 +4,7 @@
     <attr name="calculatorTextStyle" format="reference"/>
     <attr name="calculatorTextOutValueStyle" format="reference"/>
     <attr name="calculatorEditTextStyle" format="reference"/>
-    <!--<attr name="spinItemStyle" format="reference"/>-->
+    <attr name="calculatorSpinnerStyle" format="reference"/>
     <attr name="calculatorButtonStyle" format="reference"/>
     <attr name="calculatorDividerStyle" format="reference"/>
 </resources>
