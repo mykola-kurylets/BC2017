@@ -207,13 +207,25 @@ public class Application
     {
         String file = filePath;
         if(folderPath != null && file.equalsIgnoreCase(ComfigurationManager.m_UnDefined))
-            file = folderPath + "/" + "SVD-1974-PSO1.xml";
+            file = folderPath + "/" + filePath;
 
-        if(m_BCModule.GunSystemLoad(file))
+        if(m_BCModule.GunSystemLoad(file)) {
+            m_Config.SetGunSystemFileName(file);
             return;
+        }
 
-        String startFolder = null;
-       // m_GUIManager.ShowGunSystemFileDlg(m_DlgExecuter, startFolder);
+        String startFolder;
+        int lastSlesh = file.lastIndexOf('/');
+
+        try {
+            startFolder = file.substring(0, lastSlesh);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            return;
+        }
+
+        m_GUIManager.ShowGunSystemFileDlg(m_DlgExecuter, startFolder);
     }
 
     public class GunSystemFileDlgExecuter implements GunSystemFileDlg.IGunSystemFileDlgListener
