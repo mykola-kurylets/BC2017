@@ -116,12 +116,21 @@ public class Application
     {
         String folder = GetFolderPath();
 
+        if(folder == null)
+            return;
+
         GunSystemLoadCheck(folder, m_Config.GetGunSystemFileName());
     }
 
-    public void CopyFilesFromAssets(String destenitionDir, String assetsSubDir)
+    public boolean CopyFilesFromAssets(String destenitionDir, String assetsSubDir)
     {
         AssetManager assetManager = m_Owner.getAssets();
+
+        if(assetManager == null){
+            m_GUIManager.ShowAlertDialog("Файли систем не знайдено!");
+            return false;
+        }
+
         String[] files = null;
 
         try {
@@ -129,9 +138,11 @@ public class Application
         }
         catch (IOException e)
         {
+            m_GUIManager.ShowAlertDialog(e.getLocalizedMessage());
+            return false;
         }
         if (files == null)
-            return;
+            return true;
 
         for (String filename : files) {
 
@@ -145,6 +156,8 @@ public class Application
             }
             catch(IOException e)
             {
+                m_GUIManager.ShowAlertDialog(e.getLocalizedMessage());
+                return false;
             }
             finally
             {
@@ -154,6 +167,8 @@ public class Application
                     }
                     catch (IOException e)
                     {
+                        m_GUIManager.ShowAlertDialog(e.getLocalizedMessage());
+                        return false;
                     }
                 }
                 if (out != null) {
@@ -162,10 +177,14 @@ public class Application
                     }
                     catch (IOException e)
                     {
+                        m_GUIManager.ShowAlertDialog(e.getLocalizedMessage());
+                        return false;
                     }
                 }
             }
         }
+
+        return true;
     }
 
     private void CopyFile(InputStream in, OutputStream out) throws IOException
@@ -196,7 +215,8 @@ public class Application
 
         bcTables.mkdir();
 
-        CopyFilesFromAssets(bcDirPath, bcDirName);
+        if(!CopyFilesFromAssets(bcDirPath, bcDirName))
+            return null;
 
         return bcDirPath;
     }

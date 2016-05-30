@@ -1,8 +1,10 @@
 package GUIManager;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.view.Menu;
 
 import com.kurylets.mykola.bc2017.MainActivity;
@@ -146,6 +148,23 @@ public class GUIManager
         m_CalcFragment.GetPreferences(preference);
 
         return true;
+    }
+
+    public void ShowAlertDialog(String massage)
+    {
+        AlertDialog.Builder delmessagebuilder = new AlertDialog.Builder(m_App.GetActivity());
+
+        delmessagebuilder.setCancelable(false);
+
+        delmessagebuilder.setMessage(massage);
+
+        delmessagebuilder.setNeutralButton("Oк", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        delmessagebuilder.create().show();
     }
 
     public String GetPreferencesName()
