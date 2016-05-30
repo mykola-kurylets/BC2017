@@ -34,6 +34,7 @@ public class CalculationFragment extends Fragment
         m_UserInput = new InputData();
         m_UserOutput = new OutputData();
         m_FrListener = null;
+        m_Clear = new EditCleaner();
     }
 
     public interface ICalculationFragmentListener
@@ -212,6 +213,20 @@ public class CalculationFragment extends Fragment
         }
     }
 
+    public class EditCleaner implements View.OnFocusChangeListener
+    {
+        @Override
+        public void onFocusChange(View v, boolean state)
+        {
+            if(state){
+                TextView focusText = (TextView)v;
+                focusText.setText(m_Empty);
+//                focusText.setCursorVisible(true);
+            }
+
+        }
+    }
+
     private void InitControls(View view)
     {
         m_DistanceInput = (EditText)view.findViewById(R.id.distance_value_id);
@@ -229,6 +244,10 @@ public class CalculationFragment extends Fragment
         m_TemperatureInput.setOnEditorActionListener(m_CalcEvent);
         m_PressureInput.setOnEditorActionListener(m_CalcEvent);
         m_WindSpeedInput.setOnEditorActionListener(m_CalcEvent);
+        m_DistanceInput.setOnFocusChangeListener(m_Clear);
+        m_TemperatureInput.setOnFocusChangeListener(m_Clear);
+        m_PressureInput.setOnFocusChangeListener(m_Clear);
+        m_WindSpeedInput.setOnFocusChangeListener(m_Clear);
         m_CalcButton.setOnClickListener(m_CalcEvent);
         m_WindDirectionSelect.setOnItemSelectedListener(new AdapterListener());
 
@@ -247,6 +266,7 @@ public class CalculationFragment extends Fragment
     private TextView                     m_HorErrorOutput;
     private Button                       m_CalcButton;
     private CalculationEvent             m_CalcEvent;
+    private EditCleaner                  m_Clear;
 
     private InputData                    m_UserInput;
     private OutputData                   m_UserOutput;
@@ -258,6 +278,7 @@ public class CalculationFragment extends Fragment
     public final static String          m_PressureControlsName = "PressureValue";
     public final static String          m_SpeedControlsName = "SpeedValue";
     public final static String          m_DirectionControlsName = "DirectionValue";
+    public final static String          m_Empty = "";
 
     private int[] m_ArrowImages = { R.drawable.arrow0
             , R.drawable.arrow45
