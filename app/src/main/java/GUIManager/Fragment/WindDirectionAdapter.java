@@ -9,8 +9,6 @@ import android.widget.ImageView;
 
 import com.kurylets.mykola.bc2017.R;
 
-import GUIManager.GUIManager;
-
 /**
  * Created by samsung on 25.05.2016.
  */
@@ -19,14 +17,14 @@ public class WindDirectionAdapter extends BaseAdapter
     public WindDirectionAdapter(Context context, int[] direction)
     {
         this.context = context;
-        this.direction = direction;
+        this.directions = direction;
         inflater = (LayoutInflater.from(context));;
     }
 
     @Override
     public int getCount()
     {
-        return direction.length;
+        return directions.length;
     }
 
     @Override
@@ -46,12 +44,12 @@ public class WindDirectionAdapter extends BaseAdapter
     {
         view = inflater.inflate(R.layout.spinner_item, null);
         ImageView icon = (ImageView) view.findViewById(R.id.direction_arrow_id);
-        icon.setImageResource(direction[i]);
+        icon.setImageResource(directions[i]);
         return view;
     }
 
     private Context context;
-    private int direction[];
+    private int directions[];
     private LayoutInflater inflater;
 
 }
