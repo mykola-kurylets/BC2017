@@ -15,7 +15,7 @@ public class CalculatorMenu
         m_MenuLstnr = null;
     }
 
-    public CalculatorMenu(IMenuListener mnListn)
+    public void SetListener(IMenuListener mnListn)
     {
         m_MenuLstnr = mnListn;
     }

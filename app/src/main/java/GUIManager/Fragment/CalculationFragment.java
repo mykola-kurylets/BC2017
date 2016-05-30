@@ -25,18 +25,8 @@ import com.kurylets.mykola.bcmodule.WindDirections;
 import Utilities.StringsMap;
 
 
-public class CalculationFragment extends Fragment implements AdapterView.OnItemSelectedListener
+public class CalculationFragment extends Fragment
 {
-    @Override
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> arg0) {
-
-    }
-
 
     public  CalculationFragment()
     {
@@ -46,9 +36,13 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         m_FrListener = null;
     }
 
-    public CalculationFragment(ICalculationFragmentListener calcListener)
+    public interface ICalculationFragmentListener
     {
-        this();
+        boolean OnCalculate(InputData inD, OutputData outD);
+    }
+
+    public void SetListener(ICalculationFragmentListener calcListener)
+    {
         m_FrListener = calcListener;
     }
 
@@ -60,28 +54,10 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         return view;
     }
 
-    public interface ICalculationFragmentListener
+    @Override
+    public void onResume()
     {
-         boolean OnCalculate(InputData inD, OutputData outD);
-    }
-
-    public class  CalculationEvent implements View.OnClickListener,  TextView.OnEditorActionListener
-    {
-        @Override
-        public void onClick(View v)
-        {
-            ExecudeCalculate();
-        }
-
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-        {
-            if (actionId == EditorInfo.IME_ACTION_DONE)
-            {
-                ExecudeCalculate();
-            }
-            return false;
-        }
+        super.onResume();
 
     }
 
@@ -89,6 +65,7 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
     {
         if(m_FrListener == null )
             return false;
+
         GatherInputData();
 
         if(!m_FrListener.OnCalculate(m_UserInput, m_UserOutput))
@@ -200,6 +177,41 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
             m_WindDirectionSelect.setSelection(Integer.parseInt(strVal));
     }
 
+    public class  CalculationEvent implements View.OnClickListener,  TextView.OnEditorActionListener
+    {
+        @Override
+        public void onClick(View v)
+        {
+            ExecudeCalculate();
+        }
+
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+        {
+            if (actionId == EditorInfo.IME_ACTION_DONE)
+            {
+                ExecudeCalculate();
+            }
+            return false;
+        }
+
+    }
+
+    public class AdapterListener  implements AdapterView.OnItemSelectedListener
+    {
+        @Override
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
+        {
+            ExecudeCalculate();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0)
+        {
+
+        }
+    }
+
     private void InitControls(View view)
     {
         m_DistanceInput = (EditText)view.findViewById(R.id.distance_value_id);
@@ -218,9 +230,9 @@ public class CalculationFragment extends Fragment implements AdapterView.OnItemS
         m_PressureInput.setOnEditorActionListener(m_CalcEvent);
         m_WindSpeedInput.setOnEditorActionListener(m_CalcEvent);
         m_CalcButton.setOnClickListener(m_CalcEvent);
-        m_WindDirectionSelect.setOnItemSelectedListener(this);
+        m_WindDirectionSelect.setOnItemSelectedListener(new AdapterListener());
 
-        WindDirectionAdapter customAdapter=new WindDirectionAdapter(getActivity().getApplicationContext(), m_ArrowImages);
+        WindDirectionAdapter customAdapter = new WindDirectionAdapter(getActivity().getApplicationContext(), m_ArrowImages);
         m_WindDirectionSelect.setAdapter(customAdapter);
     }
 

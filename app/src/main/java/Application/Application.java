@@ -20,6 +20,7 @@ import java.io.OutputStream;
 import Configuration.ComfigurationManager;
 import GUIManager.Dialog.GunSystemFileDlg;
 import GUIManager.GUIManager;
+import Utilities.FileUtilities;
 
 
 public class Application
@@ -33,36 +34,43 @@ public class Application
         m_DlgExecuter   = new GunSystemFileDlgExecuter();
     }
 
-    public boolean Load()
+    public boolean LoadGeneralConfigs()
     {
-        if(!m_Config.Load())
-            return false;
-
-        SetFragment(m_Owner.getFragmentManager(), R.id.main_container);
-
-        StartApp();
-
-        return true;
+        return m_Config.LoadGeneralPreferences();
     }
 
+    public boolean LoadGUIConfigs()
+    {
+        return m_Config.LoadGUIPreferences();
+    }
 
-
-//    для зміни режиму необхідно перезапустити програму
-   public void ChangeMode()
-   {
-       m_Owner.finish();
-       m_Owner.startActivity(new Intent(m_Owner, m_Owner.getClass()));
-       m_Owner.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-   }
-
-//    загрузка вибраної теми
-
+    //  для зміни режиму необхідно перезапустити програму
+    public void Reset()
+    {
+        m_Owner.finish();
+        m_Owner.startActivity(new Intent(m_Owner, m_Owner.getClass()));
+        m_Owner.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 
     public int GetCurrentMode()
     {
-        return m_GUIManager.GetCurrentMode();
+        return m_Config.GetCurrentMode();
     }
 
+    public void SetCurentMode(int mode)
+    {
+        m_Config.SetCurentMode(mode);
+    }
+
+    public String GetCurrentSystemFile()
+    {
+        return m_Config.GetGunSystemFileName();
+    }
+
+    public void SetCurrentSystemFile(String path)
+    {
+        m_Config.SetGunSystemFileName(path);
+    }
 
     public boolean Save()
     {
@@ -99,7 +107,12 @@ public class Application
         m_GUIManager.SetFragment(fragM, resId);
     }
 
-    public void StartApp()
+    public void SetListeners()
+    {
+        m_GUIManager.SetListeners();
+    }
+
+    public void LoadGunSystemFiles()
     {
         String folder = GetFolderPath();
 
@@ -199,16 +212,9 @@ public class Application
             return;
         }
 
-        String startFolder;
-        int lastSlesh = file.lastIndexOf('/');
-
-        try {
-            startFolder = file.substring(0, lastSlesh);
-        }
-        catch (IndexOutOfBoundsException e)
-        {
+        String startFolder = FileUtilities.GetFolderPathFromFile(file);
+        if(startFolder == null)
             return;
-        }
 
         m_GUIManager.ShowGunSystemFileDlg(m_DlgExecuter, startFolder);
     }

@@ -14,12 +14,13 @@ import com.kurylets.mykola.bc2017.R;
 
 public class SelectModeDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
-    public interface ISelectModeListener {
-         void OnPossitive();
+    public interface ISelectModeListener
+    {
+         void OnPossitive(int res);
     }
 
-
-    public SelectModeDialog() {
+    public SelectModeDialog()
+    {
         m_DialogBody = null;
         m_ModeListener = null;
     }
@@ -27,16 +28,12 @@ public class SelectModeDialog extends DialogFragment implements DialogInterface.
     public void SetListener(ISelectModeListener sml)
     {
         m_ModeListener = sml;
-
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
-        m_Yes = getString(R.string.yes_text);
-        m_Cancel = getString(R.string.cancel_text);
-
-//        ініціалізація елементів інтерфейсу діалогу вибору вікна
+        // ініціалізація елементів інтерфейсу діалогу вибору вікна
         m_DialogBody = getActivity().getLayoutInflater().inflate(R.layout.select_mode_dialog, null);
         m_DayModeRadio = (RadioButton) m_DialogBody.findViewById(R.id.day_radio_id);
         m_NightModeRadio = (RadioButton) m_DialogBody.findViewById(R.id.night_radio_id);
@@ -47,34 +44,25 @@ public class SelectModeDialog extends DialogFragment implements DialogInterface.
         m_ModeDialogBuilder.setView(m_DialogBody);
 
 
-        m_ModeDialogBuilder.setPositiveButton(m_Yes, this);
-        m_ModeDialogBuilder.setNegativeButton(m_Cancel, this);
+        m_ModeDialogBuilder.setPositiveButton(getString(R.string.yes_text), this);
+        m_ModeDialogBuilder.setNegativeButton(getString(R.string.cancel_text), this);
 
 
         return m_ModeDialogBuilder.create();
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
+    public void onClick(DialogInterface dialog, int which)
+    {
         if (m_ModeListener == null)
             return;
 
-        switch (which) {
-            case Dialog.BUTTON_POSITIVE:
-                m_ModeListener.OnPossitive();
-                break;
-            case Dialog.BUTTON_NEGATIVE:
-                dialog.dismiss();
-                break;
-
+        if(which == Dialog.BUTTON_NEGATIVE){
+            dismiss();
+            return;
         }
-    }
 
-//    отримати активний RadioButton та присвоїти відповідний режим
-    public int GetMode()
-    {
-        int checkedMode = m_RadioGroup.getCheckedRadioButtonId();
-        switch (checkedMode)
+        switch (m_RadioGroup.getCheckedRadioButtonId())
         {
             case R.id.day_radio_id:
                 m_CurrMode = DAY_MODE;
@@ -83,6 +71,13 @@ public class SelectModeDialog extends DialogFragment implements DialogInterface.
                 m_CurrMode = NIGHT_MODE;
                 break;
         }
+
+        m_ModeListener.OnPossitive(m_CurrMode);
+    }
+
+    // отримати активний RadioButton та присвоїти відповідний режим
+    public int GetMode()
+    {
         return m_CurrMode;
     }
 
@@ -116,8 +111,6 @@ public class SelectModeDialog extends DialogFragment implements DialogInterface.
     private RadioButton         m_NightModeRadio;
     private RadioGroup          m_RadioGroup;
 
-    private  String m_Yes;
-    private  String m_Cancel;
     private int                 m_CurrMode;
     private final int           DAY_MODE = 0;
     private final int           NIGHT_MODE = 1;

@@ -39,17 +39,61 @@ public class ComfigurationManager
         return m_TablesFolderName;
     }
 
+    public int GetCurrentMode()
+    {
+        return m_CurrentMode;
+    }
+
+    public void SetCurentMode(int mode)
+    {
+        m_CurrentMode = mode;
+    }
+
     public boolean Load()
     {
-        SharedPreferences gPref = m_App.GetPreferances(m_GeneralPrefTagName, MainActivity.MODE_PRIVATE);
-
-        if(!LoadGeneralPreferences(gPref))
+        if(!LoadGeneralPreferences())
             return false;
 
-        String guiPrefname = "bc-2017-gui-pref";//m_App.GetGUIManager().GetPreferencesName();
-        SharedPreferences guiPref = m_App.GetPreferances(guiPrefname, MainActivity.MODE_PRIVATE);
+        return LoadGUIPreferences();
+    }
 
-        return LoadGUIPreferences(guiPref);
+    public boolean LoadGeneralPreferences()
+    {
+        // читаємо імя останньо вибраної системи
+        SharedPreferences gPref = m_App.GetPreferances(m_GeneralPrefTagName, MainActivity.MODE_PRIVATE);
+        if(gPref == null)
+            return false;
+
+        m_SystemFileName = gPref.getString(m_SystemFileTagName, m_UnDefined);
+
+        m_CurrentMode = gPref.getInt(m_ModeTagName, MainActivity.m_DayModeTheme);
+
+        return true;
+    }
+
+    public boolean LoadGUIPreferences()
+    {
+        SharedPreferences guiPref = m_App.GetPreferances(m_App.GetGUIManager().GetPreferencesName(), MainActivity.MODE_PRIVATE);
+        if(guiPref == null)
+            return false;
+
+        StringsMap guiMap = new StringsMap();
+
+        // отримуємо налаштування графічного інтерфейсу
+        Map<String, ?> guiPrefMap = guiPref.getAll();
+        Set<String> keysSet = guiPrefMap.keySet();
+        Object []keys = keysSet.toArray();
+        for(int i = 0, stape = keys.length; i < stape; ++i){
+            String key = (String)keys[i];
+
+            guiMap.put(key, (String)guiPrefMap.get(key));
+        }
+
+        m_App.GetGUIManager().SetPreferences((StringsMap)guiMap.clone());
+
+        guiMap.clear();
+
+        return true;
     }
 
     public boolean Save()
@@ -59,7 +103,7 @@ public class ComfigurationManager
         if(!SaveGeneralPreferences(gPref))
             return false;
 
-        String guiPrefname = "bc-2017-gui-pref";//m_App.GetGUIManager().GetPreferencesName();
+        String guiPrefname = m_App.GetGUIManager().GetPreferencesName();
         SharedPreferences guiPref = m_App.GetPreferances(guiPrefname, MainActivity.MODE_PRIVATE);
 
         return SaveGUIPreferences(guiPref);
@@ -72,6 +116,8 @@ public class ComfigurationManager
 
         // зберігаємо імя файлу останньої вибраної системи
         prefEditor.putString(m_SystemFileTagName, m_SystemFileName);
+        // зберігаємо поточний режим
+        prefEditor.putInt(m_ModeTagName, m_CurrentMode);
         // записуємо на диск
         prefEditor.commit();
 
@@ -84,7 +130,9 @@ public class ComfigurationManager
         prefEditor.clear();
 
         // отримуємо налаштування графічного інтерфейсу
-        StringsMap guiMapPref = new StringsMap();//m_App.GetGUIManager().GetPreferences();
+        StringsMap guiMapPref = new StringsMap();
+        m_App.GetGUIManager().GetPreferences(guiMapPref);
+
         if(guiMapPref.isEmpty())
             return false;
 
@@ -102,41 +150,14 @@ public class ComfigurationManager
         return true;
     }
 
-    private boolean LoadGeneralPreferences(SharedPreferences gPref)
-    {
-        // читаємо імя останньо вибраної системи
-        m_SystemFileName = gPref.getString(m_SystemFileTagName, m_UnDefined);
-
-        return true;
-    }
-
-    private boolean LoadGUIPreferences(SharedPreferences guiPref)
-    {
-        StringsMap guiMap = new StringsMap();
-
-        // отримуємо налаштування графічного інтерфейсу
-        Map<String, ?> guiPrefMap = guiPref.getAll();
-        Set<String> keysSet = guiPrefMap.keySet();
-        Object []keys = keysSet.toArray();
-        for(int i = 0, stape = keys.length; i < stape; ++i){
-            String key = (String)keys[i];
-
-            guiMap.put(key, (String)guiPrefMap.get(key));
-        }
-
-        //m_App.GetGUIManager().SetPreferences((StringsMap)guiMap.clone());
-
-        guiMap.clear();
-
-        return true;
-    }
-
 
     private Application m_App;
 
     private final String m_SystemFileTagName    = "system-file";
     private final String m_TablesFolderName     = "bctables";
     private final String m_GeneralPrefTagName   = "bc2017-general-pref";
+    private final String m_ModeTagName          = "cur-mode-name";
 
-    private String m_SystemFileName;
+    private String       m_SystemFileName;
+    private int          m_CurrentMode;
 }

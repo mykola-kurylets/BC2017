@@ -6,18 +6,15 @@ import android.app.FragmentTransaction;
 import android.view.Menu;
 
 import com.kurylets.mykola.bc2017.MainActivity;
-import com.kurylets.mykola.bc2017.R;
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
-
-import java.util.Map;
-import java.util.Set;
 
 import Application.Application;
 import GUIManager.Dialog.GunSystemFileDlg;
 import GUIManager.Dialog.SelectModeDialog;
 import GUIManager.Fragment.CalculationFragment;
 import GUIManager.Fragment.CalculationFragment.ICalculationFragmentListener;
+import Utilities.FileUtilities;
 import Utilities.StringsMap;
 
 
@@ -25,22 +22,28 @@ public class GUIManager
 {
     public GUIManager(Application app)
     {
-        m_App = app;
-        m_CalcMenu = new CalculatorMenu(new MenuListener());
-        m_CalcFragment = new CalculationFragment(new CalculationFragmentListener());
-        m_ModeDialog = new SelectModeDialog();
-        m_ModeDialog.SetListener(new SelectModeListener());
-        m_ChoseGunSystemDlg = new GunSystemFileDlg();
-        m_CurrentMode = MainActivity.m_DayModeTheme;
+        m_App                       = app;
+        m_CalcMenu                  = new CalculatorMenu();
+        m_CalcFragment              = new CalculationFragment();
+        m_ModeDialog                = new SelectModeDialog();
+        m_ChoseGunSystemDlg         = new GunSystemFileDlg();
+        m_ExecudeGunSystemFileDlg   = new GunSystemFileDlgExecuter();
+        m_MenuListener              = new MenuListener();
+        m_ClacFrgListener           = new CalculationFragmentListener();
+        m_SelectModeListener        = new SelectModeListener();
+    }
+
+    public void SetListeners()
+    {
+        m_CalcMenu.SetListener(m_MenuListener);
+        m_CalcFragment.SetListener(m_ClacFrgListener);
+        m_ModeDialog.SetListener(m_SelectModeListener);
     }
 
     public CalculatorMenu GetMenu()
     {
         return m_CalcMenu;
     }
-
-    public int GetCurrentMode(){ return m_CurrentMode; }
-    public void SetCurrentMode(int mode){m_CurrentMode = mode; }
 
     class CalculationFragmentListener implements ICalculationFragmentListener
     {
@@ -62,7 +65,7 @@ public class GUIManager
         @Override
         public void ExecudeSystemItem()
         {
-
+            ShowGunSystemFileDlg(m_ExecudeGunSystemFileDlg, FileUtilities.GetFolderPathFromFile(m_App.GetCurrentSystemFile()));
         }
 
         @Override
@@ -72,26 +75,35 @@ public class GUIManager
         }
     }
 
-    class SelectModeListener implements SelectModeDialog.ISelectModeListener
+    public class GunSystemFileDlgExecuter implements GunSystemFileDlg.IGunSystemFileDlgListener
     {
         @Override
-       public void OnPossitive()
+        public void SetFile(String path)
         {
-            if (m_CurrentMode == m_ModeDialog.GetMode())
+            if(!m_App.GunSystemLoad(path))
                 return;
-            m_CurrentMode = m_ModeDialog.GetMode();
-            m_App.ChangeMode();
 
+            m_App.SetCurrentSystemFile(path);
         }
     }
 
+    class SelectModeListener implements SelectModeDialog.ISelectModeListener
+    {
+        @Override
+       public void OnPossitive(int res)
+        {
+            if (m_App.GetCurrentMode() == res)
+                return;
 
-
+            m_App.SetCurentMode(res);
+            m_App.Reset();
+        }
+    }
 
     public void ShowSelectModeDialog()
     {
-        m_ModeDialog.SetMode(m_CurrentMode);
-        m_ModeDialog.show(m_CalcFragment.getFragmentManager(), "ModeDialog");
+        m_ModeDialog.SetMode(m_App.GetCurrentMode());
+        m_ModeDialog.show(m_App.GetActivity().getFragmentManager(), "ModeDialog");
     }
 
     public void ShowGunSystemFileDlg(GunSystemFileDlg.IGunSystemFileDlgListener dlgExecuter, String startFolder)
@@ -99,7 +111,7 @@ public class GUIManager
         m_ChoseGunSystemDlg.SetListener(dlgExecuter);
         m_ChoseGunSystemDlg.SetCurrent(startFolder);
 
-        m_ChoseGunSystemDlg.show(m_CalcFragment.getFragmentManager(), "GunSystemDlg");
+        m_ChoseGunSystemDlg.show(m_App.GetActivity().getFragmentManager(), "GunSystemDlg");
     }
 
     public boolean CreateMenu(Menu menu)
@@ -107,7 +119,7 @@ public class GUIManager
         return  m_CalcMenu.CreateMenu(menu);
     }
 
-//     установка фрагменту
+    // установка фрагменту
     public void SetFragment(FragmentManager fragM, int resId)
     {
         FragmentTransaction fragT = fragM.beginTransaction();
@@ -115,48 +127,39 @@ public class GUIManager
         fragT.commit();
     }
 
-
     public boolean SetPreferences(StringsMap preference)
     {
         if (preference == null)
             return false;
-        String mode = preference.get(m_ModeName);
-         if ( mode != null && !mode.isEmpty())
-             m_CurrentMode = Integer.parseInt(mode);
+
         m_CalcFragment.SetPreference(preference);
 
         return true;
     }
 
-
     public boolean GetPreferences(StringsMap preference )
     {
-
         if(preference == null)
             return false;
-
         preference.clear();
-        preference.put(m_ModeName, String.valueOf(m_CurrentMode));
+
         m_CalcFragment.GetPreferences(preference);
 
         return true;
     }
 
-
-
-    public String GetPreferenceName()
+    public String GetPreferencesName()
     {
         return "bc-2017-gui-pref";
     }
 
-    private Application         m_App;
-    private CalculationFragment m_CalcFragment;
-    private CalculatorMenu      m_CalcMenu;
-    private SelectModeDialog    m_ModeDialog;
-    private GunSystemFileDlg    m_ChoseGunSystemDlg;
-    private int                 m_CurrentMode;
-
-    private static final String  m_ModeName = "cur-mode-name";
-
-
+    private Application                 m_App;
+    private CalculationFragment         m_CalcFragment;
+    private CalculatorMenu              m_CalcMenu;
+    private SelectModeDialog            m_ModeDialog;
+    private GunSystemFileDlg            m_ChoseGunSystemDlg;
+    private GunSystemFileDlgExecuter    m_ExecudeGunSystemFileDlg;
+    private MenuListener                m_MenuListener;
+    private CalculationFragmentListener m_ClacFrgListener;
+    private SelectModeListener          m_SelectModeListener;
 }
