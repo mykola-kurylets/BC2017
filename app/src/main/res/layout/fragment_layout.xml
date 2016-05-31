@@ -13,7 +13,7 @@
 
         <EditText
             style="?calculatorEditTextStyle"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:id="@+id/distance_value_id" />
     </LinearLayout>
 
@@ -26,7 +26,7 @@
 
         <EditText
             style="?calculatorEditTextStyle"
-            android:inputType="number|numberDecimal|numberSigned"
+            android:inputType="number|numberSigned"
             android:id="@+id/temperature_value_id" />
     </LinearLayout>
 
@@ -39,7 +39,7 @@
 
         <EditText
             style="?calculatorEditTextStyle"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:id="@+id/pressure_value_id" />
     </LinearLayout>
 
@@ -52,7 +52,7 @@
 
         <EditText
             style="?calculatorEditTextStyle"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:id="@+id/speed_value_id"/>
     </LinearLayout>
 

@@ -8,6 +8,7 @@ import android.content.res.AssetManager;
 import com.kurylets.mykola.bc2017.MainActivity;
 import com.kurylets.mykola.bc2017.R;
 import com.kurylets.mykola.bcmodule.BCModule;
+import com.kurylets.mykola.bcmodule.ErrorState;
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
 
@@ -27,11 +28,12 @@ public class Application
 {
     public Application(MainActivity mA)
     {
-        m_Owner         = mA;
-        m_GUIManager    = new GUIManager(this);
-        m_BCModule      = new BCModule();
-        m_Config        = new ComfigurationManager(this);
-        m_DlgExecuter   = new GunSystemFileDlgExecuter();
+        m_Owner             = mA;
+        m_GUIManager        = new GUIManager(this);
+        m_BCModule          = new BCModule();
+        m_Config            = new ComfigurationManager(this);
+        m_DlgExecuter       = new GunSystemFileDlgExecuter();
+        m_GunSystemLoaded   = false;
     }
 
     public boolean LoadGeneralConfigs()
@@ -79,7 +81,7 @@ public class Application
 
     public boolean GunSystemLoad(String filePath)
     {
-        return m_BCModule.GunSystemLoad(filePath);
+        return (m_GunSystemLoaded = m_BCModule.GunSystemLoad(filePath));
     }
 
     public GUIManager GetGUIManager()
@@ -97,8 +99,11 @@ public class Application
         return m_Owner;
     }
 
-    public boolean Calculate(InputData inD, OutputData outD)
+    public ErrorState Calculate(InputData inD, OutputData outD)
     {
+        if(!m_GunSystemLoaded)
+            return ErrorState.eSystemDoesntLoaded;
+
         return m_BCModule.Calculate(inD, outD);
     }
 
@@ -168,7 +173,6 @@ public class Application
                     catch (IOException e)
                     {
                         m_GUIManager.ShowAlertDialog(e.getLocalizedMessage());
-                        return false;
                     }
                 }
                 if (out != null) {
@@ -178,7 +182,6 @@ public class Application
                     catch (IOException e)
                     {
                         m_GUIManager.ShowAlertDialog(e.getLocalizedMessage());
-                        return false;
                     }
                 }
             }
@@ -227,7 +230,7 @@ public class Application
         if(folderPath != null && file.equalsIgnoreCase(ComfigurationManager.m_UnDefined))
             file = folderPath + "/" + filePath;
 
-        if(m_BCModule.GunSystemLoad(file)) {
+        if(GunSystemLoad(file)) {
             m_Config.SetGunSystemFileName(file);
             return;
         }
@@ -254,6 +257,7 @@ public class Application
     private BCModule                    m_BCModule;
     private ComfigurationManager        m_Config;
     private GunSystemFileDlgExecuter    m_DlgExecuter;
+    private boolean                     m_GunSystemLoaded;
 
 }
 

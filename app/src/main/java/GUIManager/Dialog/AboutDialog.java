@@ -28,7 +28,7 @@ public class AboutDialog extends DialogFragment implements DialogInterface.OnCli
         // ініціалізація елементів інтерфейсу діалогу вибору вікна
         m_DialogBody = getActivity().getLayoutInflater().inflate(R.layout.about_dialog, null);
         m_Message = (TextView)m_DialogBody.findViewById(R.id.about_message);
-        m_Message.setText("Програма створена Миколою Курилцем за участі у розробці Тимочко Ірини");
+        m_Message.setText("Балістичний калькулятор БК2017.\nРозробники:\n\tТимочко Ірина\n\tКурилець Микола");
         AlertDialog.Builder m_AboutDialogBuilder = new AlertDialog.Builder(getActivity());
         m_AboutDialogBuilder.setView(m_DialogBody);
         m_AboutDialogBuilder.setPositiveButton(getString(R.string.yes_text), this);
