@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BC2017</string>
+    <string name="app_name">БК2017</string>
     <string name="action_settings">Settings</string>
     <string name="distance_input_name">Дистанція, м :</string>
     <string name="temperature_input_name">Температура, °С :</string>
@@ -23,4 +23,13 @@
     <string name="select_system_text">Вибір системи</string>
     <string name="select_system">Вибір вогневої системи</string>
     <string name="select_about_text">Про програму</string>
+
+    <!-- Повідомлення помилок розрахунку -->
+    <string name="c_dist_out_min">Розрахована дистанція менша табличного діапазону!</string>
+    <string name="c_dist_out_max">Розрахована дистанція більша табличного діапазону!</string>
+    <string name="t_dist_out_min">Введена дистанція менша табличного діапазону!</string>
+    <string name="t_dist_out_max">Введена дистанція більше табличного діапазону!</string>
+    <string name="unknown_error">Виявлена невідома помилка!</string>
+    <string name="system_not_loaded">Завантажте вогневу систему!</string>
+
 </resources>

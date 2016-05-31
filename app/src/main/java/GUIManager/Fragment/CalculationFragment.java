@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -15,10 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.kurylets.mykola.bc2017.R;
+import com.kurylets.mykola.bcmodule.ErrorState;
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
 import com.kurylets.mykola.bcmodule.WindDirections;
@@ -40,7 +41,8 @@ public class CalculationFragment extends Fragment
 
     public interface ICalculationFragmentListener
     {
-        boolean OnCalculate(InputData inD, OutputData outD);
+        ErrorState OnCalculate(InputData inD, OutputData outD);
+        void ShowMassage(String msg, ErrorState es);
     }
 
     public void SetListener(ICalculationFragmentListener calcListener)
@@ -70,11 +72,32 @@ public class CalculationFragment extends Fragment
 
         GatherInputData();
 
-        if(!m_FrListener.OnCalculate(m_UserInput, m_UserOutput))
-           return false;
+        String msgStr = getString(R.string.unknown_error);
+        ErrorState es = m_FrListener.OnCalculate(m_UserInput, m_UserOutput);
+        switch (es)
+        {
+            case eOk:
+                PutOutputData();
+                return true;
+            case eCalckDistanceOutOfMin:
+                msgStr = getString(R.string.c_dist_out_min);
+                break;
+            case eCalckDistanceOutOfMax:
+                msgStr = getString(R.string.c_dist_out_max);
+                break;
+            case eTrueDistanceOfMin:
+                msgStr = getString(R.string.t_dist_out_min);
+                break;
+            case eTrueDistanceOfMax:
+                msgStr = getString(R.string.t_dist_out_max);
+                break;
+            case eSystemDoesntLoaded:
+                msgStr = getString(R.string.system_not_loaded);
+        }
 
-        PutOutputData();
-        return true;
+        m_FrListener.ShowMassage(msgStr, es);
+
+        return false;
     }
 
     private void GatherInputData() {
@@ -136,10 +159,7 @@ public class CalculationFragment extends Fragment
         String str = input.toString();
         if(str == null || str.isEmpty() )
             return null;
-        if(str.equals("-")){
-            Toast.makeText(getActivity(),"Неправильна Температура",Toast.LENGTH_SHORT).show();
-            return null;
-        }
+
         return  str;
     }
 
@@ -147,8 +167,18 @@ public class CalculationFragment extends Fragment
     {
         String str = GetString(userEdit);
         if(str == null)
-           return Double.MAX_VALUE;
-        return Double.parseDouble(str);
+           return 0.0;
+
+        double res = 0.0;
+        try {
+            res = Double.parseDouble(str);
+        }
+        catch (NumberFormatException e)
+        {
+            return 0.0;
+        }
+
+        return res;
     }
 
     public void GetPreferences(StringsMap preference)
@@ -218,18 +248,22 @@ public class CalculationFragment extends Fragment
         }
     }
 
-    public class EditCleaner implements View.OnFocusChangeListener
+    public class EditCleaner implements View.OnTouchListener
     {
         @Override
-        public void onFocusChange(View v, boolean state)
+        public boolean onTouch(View v, MotionEvent event)
         {
-            if(state){
-                TextView focusText = (TextView)v;
-//                focusText.setText(m_Empty);
-                focusText.append(m_Empty);
-//                focusText.setCursorVisible(true);
-            }
+            if(v == null)
+                return false;
 
+            if(!(v instanceof EditText))
+                return false;
+
+            EditText textCtrl = (EditText)v;
+            textCtrl.setText(m_ReplaseOnTouchStr);
+
+            // повертаємо false щоб інші могли обробити цю подію
+            return false;
         }
     }
 
@@ -250,10 +284,12 @@ public class CalculationFragment extends Fragment
         m_TemperatureInput.setOnEditorActionListener(m_CalcEvent);
         m_PressureInput.setOnEditorActionListener(m_CalcEvent);
         m_WindSpeedInput.setOnEditorActionListener(m_CalcEvent);
-        m_DistanceInput.setOnFocusChangeListener(m_Clear);
-        m_TemperatureInput.setOnFocusChangeListener(m_Clear);
-        m_PressureInput.setOnFocusChangeListener(m_Clear);
-        m_WindSpeedInput.setOnFocusChangeListener(m_Clear);
+
+        m_DistanceInput.setOnTouchListener(m_Clear);
+        m_TemperatureInput.setOnTouchListener(m_Clear);
+        m_PressureInput.setOnTouchListener(m_Clear);
+        m_WindSpeedInput.setOnTouchListener(m_Clear);
+
         m_CalcButton.setOnClickListener(m_CalcEvent);
         m_WindDirectionSelect.setOnItemSelectedListener(new AdapterListener());
 
@@ -284,7 +320,7 @@ public class CalculationFragment extends Fragment
     public final static String          m_PressureControlsName = "PressureValue";
     public final static String          m_SpeedControlsName = "SpeedValue";
     public final static String          m_DirectionControlsName = "DirectionValue";
-    public final static String          m_Empty = "";
+    public final static String m_ReplaseOnTouchStr = "";
 
     private int[] m_ArrowImages = { R.drawable.arrow0
             , R.drawable.arrow45

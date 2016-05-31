@@ -52,7 +52,7 @@
         <item name="android:paddingTop">@dimen/border_top_padding</item>
         <item name="android:paddingRight">@dimen/border_right_padding</item>
         <item name="android:layout_marginBottom">@dimen/distance_between_rows</item>
-        <item name="android:text">@string/zero_value_double</item>
+        <item name="android:text">@string/zero_value_integer</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">right</item>
         <item name="android:imeOptions">actionDone</item>

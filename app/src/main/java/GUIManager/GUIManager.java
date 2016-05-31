@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.Menu;
+import android.widget.Toast;
 
-import com.kurylets.mykola.bc2017.MainActivity;
+import com.kurylets.mykola.bcmodule.ErrorState;
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
 
@@ -52,10 +54,23 @@ public class GUIManager
     class CalculationFragmentListener implements ICalculationFragmentListener
     {
 
-        public boolean OnCalculate(InputData InD, OutputData OutD)
+        public ErrorState OnCalculate(InputData InD, OutputData OutD)
          {
             return m_App.Calculate(InD, OutD );
          }
+
+        @Override
+        public void ShowMassage(String msg, ErrorState es)
+        {
+            switch (es)
+            {
+                case eSystemDoesntLoaded:
+                    ShowToast(msg);
+                    return;
+                default:
+                    ShowAlertDialog(msg);
+            }
+        }
     }
 
     class MenuListener implements CalculatorMenu.IMenuListener
@@ -172,6 +187,15 @@ public class GUIManager
         });
 
         delmessagebuilder.create().show();
+    }
+
+    public void ShowToast(String massage)
+    {
+        Context context = m_App.GetActivity().getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, massage, duration);
+        toast.show();
     }
 
     public String GetPreferencesName()
