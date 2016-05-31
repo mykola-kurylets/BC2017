@@ -13,9 +13,9 @@
                 <item name="calculatorSpinnerStyle">@style/DayModeSpinner</item>
                 <item name="calculatorButtonStyle">@style/DayModeButton</item>
                 <item name="calculatorDividerStyle">@style/DayModeDivider</item>
+                <item name="calculatorDialogStyle">@style/DayDialogStyle</item>
                 <item name="calculatorGeneralStyle">@style/DayModeBackground</item>
         </style>
-
 
         <style name="Theme.Night_Mode" parent="AppTheme">
                 <item name="android:itemBackground">@color/black</item>
@@ -29,6 +29,7 @@
                 <item name="calculatorSpinnerStyle">@style/NightModeSpinner</item>
                 <item name="calculatorButtonStyle">@style/NightModeButton</item>
                 <item name="calculatorDividerStyle">@style/NightModeDivider</item>
+                <item name="calculatorDialogStyle">@style/NightDialogStyle</item>
                 <item name="calculatorGeneralStyle">@style/NightModeBackground</item>
         </style>
         <!--<style name="Theme.Day_Mode" parent="@android:style/Theme.Holo.Light.DarkActionBar">-->
