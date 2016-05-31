@@ -7,4 +7,5 @@
     <attr name="calculatorSpinnerStyle" format="reference"/>
     <attr name="calculatorButtonStyle" format="reference"/>
     <attr name="calculatorDividerStyle" format="reference"/>
+    <attr name="calculatorDialogStyle" format="reference"/>
 </resources>

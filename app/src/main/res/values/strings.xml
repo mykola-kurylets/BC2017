@@ -21,5 +21,6 @@
     <string name="yes_text">Так</string>
     <string name="cancel_text">Відміна</string>
     <string name="select_system_text">Вибір системи</string>
+    <string name="select_system">Вибір вогневої системи</string>
     <string name="select_about_text">Про програму</string>
 </resources>

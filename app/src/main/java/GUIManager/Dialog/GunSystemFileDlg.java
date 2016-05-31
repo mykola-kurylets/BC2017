@@ -73,7 +73,7 @@ public class GunSystemFileDlg extends DialogFragment
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // встановлення заголовку діалога
-        builder.setTitle("Вибір вогневої системи");
+//        builder.setTitle("Вибір вогневої системи");
         builder.setView(m_Form);
         // кнопка ВІДМІНА
         builder.setNeutralButton(getString(R.string.cancel_text), new OnDialogBntClck());

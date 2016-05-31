@@ -5,19 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="@color/colorDayMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:gravity="center"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:text="@string/select_mode_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            style="?calculatorDialogStyle"
+            android:text="@string/select_mode_text" />
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RadioGroup

@@ -12,6 +12,7 @@ import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
 
 import Application.Application;
+import GUIManager.Dialog.AboutDialog;
 import GUIManager.Dialog.GunSystemFileDlg;
 import GUIManager.Dialog.SelectModeDialog;
 import GUIManager.Fragment.CalculationFragment;
@@ -28,6 +29,7 @@ public class GUIManager
         m_CalcMenu                  = new CalculatorMenu();
         m_CalcFragment              = new CalculationFragment();
         m_ModeDialog                = new SelectModeDialog();
+        m_AboutDialog                 = new AboutDialog();
         m_ChoseGunSystemDlg         = new GunSystemFileDlg();
         m_ExecudeGunSystemFileDlg   = new GunSystemFileDlgExecuter();
         m_MenuListener              = new MenuListener();
@@ -73,7 +75,7 @@ public class GUIManager
         @Override
         public void ExecudeAboutItem()
         {
-
+            ShowAboutDialog();
         }
     }
 
@@ -106,6 +108,11 @@ public class GUIManager
     {
         m_ModeDialog.SetMode(m_App.GetCurrentMode());
         m_ModeDialog.show(m_App.GetActivity().getFragmentManager(), "ModeDialog");
+    }
+
+    public void ShowAboutDialog()
+    {
+        m_AboutDialog.show(m_App.GetActivity().getFragmentManager(), "AboutDialog");
     }
 
     public void ShowGunSystemFileDlg(GunSystemFileDlg.IGunSystemFileDlgListener dlgExecuter, String startFolder)
@@ -176,6 +183,7 @@ public class GUIManager
     private CalculationFragment         m_CalcFragment;
     private CalculatorMenu              m_CalcMenu;
     private SelectModeDialog            m_ModeDialog;
+    private AboutDialog                 m_AboutDialog;
     private GunSystemFileDlg            m_ChoseGunSystemDlg;
     private GunSystemFileDlgExecuter    m_ExecudeGunSystemFileDlg;
     private MenuListener                m_MenuListener;

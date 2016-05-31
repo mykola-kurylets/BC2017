@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.kurylets.mykola.bc2017.R;
@@ -135,6 +136,10 @@ public class CalculationFragment extends Fragment
         String str = input.toString();
         if(str == null || str.isEmpty() )
             return null;
+        if(str.equals("-")){
+            Toast.makeText(getActivity(),"Неправильна Температура",Toast.LENGTH_SHORT).show();
+            return null;
+        }
         return  str;
     }
 
@@ -220,7 +225,8 @@ public class CalculationFragment extends Fragment
         {
             if(state){
                 TextView focusText = (TextView)v;
-                focusText.setText(m_Empty);
+//                focusText.setText(m_Empty);
+                focusText.append(m_Empty);
 //                focusText.setCursorVisible(true);
             }
 
