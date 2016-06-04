@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.kurylets.mykola.bc2017.R;
 import com.kurylets.mykola.bcmodule.ErrorState;
 import com.kurylets.mykola.bcmodule.InputData;
 import com.kurylets.mykola.bcmodule.OutputData;
@@ -180,7 +181,7 @@ public class GUIManager
 
         delmessagebuilder.setMessage(massage);
 
-        delmessagebuilder.setNeutralButton("Oк", new DialogInterface.OnClickListener() {
+        delmessagebuilder.setNeutralButton(m_App.GetActivity().getText(R.string.ok_text), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
             }

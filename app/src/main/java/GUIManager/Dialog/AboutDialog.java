@@ -6,8 +6,6 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.kurylets.mykola.bc2017.R;
@@ -31,7 +29,7 @@ public class AboutDialog extends DialogFragment implements DialogInterface.OnCli
         m_Message.setText("Балістичний калькулятор БК2017.\nРозробники:\n\tТимочко Ірина\n\tКурилець Микола");
         AlertDialog.Builder m_AboutDialogBuilder = new AlertDialog.Builder(getActivity());
         m_AboutDialogBuilder.setView(m_DialogBody);
-        m_AboutDialogBuilder.setPositiveButton(getString(R.string.yes_text), this);
+        m_AboutDialogBuilder.setPositiveButton(getString(R.string.ok_text), this);
         return m_AboutDialogBuilder.create();
     }
 

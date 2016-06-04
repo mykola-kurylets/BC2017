@@ -23,6 +23,7 @@
     <string name="select_system_text">Вибір системи</string>
     <string name="select_system">Вибір вогневої системи</string>
     <string name="select_about_text">Про програму</string>
+    <string name="ok_text">ОК</string>
 
     <!-- Повідомлення помилок розрахунку -->
     <string name="c_dist_out_min">Розрахована дистанція менша табличного діапазону!</string>
