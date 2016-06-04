@@ -51,6 +51,8 @@ public class WindDirectionAdapter extends BaseAdapter
 
     private Context context;
 //    масив id, які посилаються на ресурси іконок напрямку вітру
+
+
     private int directions[];
     private LayoutInflater inflater;
 
