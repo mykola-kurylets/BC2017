@@ -39,6 +39,7 @@ public class WindDirectionAdapter extends BaseAdapter
         return 0;
     }
 
+//встановлює кожну іконку напрямку як окремий елемент Spinner та задає її стиль
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {
@@ -49,6 +50,7 @@ public class WindDirectionAdapter extends BaseAdapter
     }
 
     private Context context;
+//    масив id, які посилаються на ресурси іконок напрямку вітру
     private int directions[];
     private LayoutInflater inflater;
 

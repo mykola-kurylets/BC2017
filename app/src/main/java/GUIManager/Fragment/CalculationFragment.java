@@ -190,6 +190,7 @@ public class CalculationFragment extends Fragment
         preference.put(m_DirectionControlsName, String.valueOf(m_WindDirectionSelect.getSelectedItemPosition()) );
     }
 
+//    перевіряє на коректність дані та встановлює збережені значення в елементи ГІ
     public void SetPreference(StringsMap preference)
     {
         String strVal = preference.get(m_DistanceControlsName);
@@ -213,6 +214,7 @@ public class CalculationFragment extends Fragment
             m_WindDirectionSelect.setSelection(Integer.parseInt(strVal));
     }
 
+//    Клас для обробки подій, які викликають обчислення результатів вводу, реагає на натиск кнопки Розрахувати та Ok/Done на віртуальній клавіатурі
     public class  CalculationEvent implements View.OnClickListener,  TextView.OnEditorActionListener
     {
         @Override
