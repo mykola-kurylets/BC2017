@@ -128,20 +128,20 @@ public class GunSystemFileDlg extends DialogFragment
     private void FormList()
     {
         m_AdapterList.clear();
-        m_AdapterList.add("../" + m_CurrentFolder.getName());
+        m_AdapterList.add(0, "../" + m_CurrentFolder.getName());
         File files[] = m_CurrentFolder.listFiles();
 
         if(files == null)
             return;
 
         m_Files.clear();
-        m_Files.add(m_CurrentFolder);
+        m_Files.add(0, m_CurrentFolder);
         for(int i = 0; i < files.length; ++i){
             File fileOrDir = files[i];
 
             if(fileOrDir.isDirectory()) {
-                m_AdapterList.add("[" + fileOrDir.getName() + "]");
-                m_Files.add(fileOrDir);
+                m_AdapterList.add(1, "[" + fileOrDir.getName() + "]");
+                m_Files.add(1, fileOrDir);
                 continue;
             }
 
@@ -149,8 +149,9 @@ public class GunSystemFileDlg extends DialogFragment
             if(systemName == null)
                 continue;
 
-            m_AdapterList.add(systemName);
-            m_Files.add(fileOrDir);
+            int size = m_Files.size();
+            m_AdapterList.add(size, systemName);
+            m_Files.add(size, fileOrDir);
         }
     }
 
