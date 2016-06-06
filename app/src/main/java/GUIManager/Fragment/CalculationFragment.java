@@ -92,7 +92,7 @@ public class CalculationFragment extends Fragment
                 msgStr = getString(R.string.t_dist_out_max);
                 break;
             case eSystemDoesntLoaded:
-                msgStr = getString(R.string.system_not_loaded);
+                msgStr = getString(R.string.load_gun_system);
         }
 
         m_FrListener.ShowMassage(msgStr, es);

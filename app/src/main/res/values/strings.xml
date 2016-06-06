@@ -31,6 +31,9 @@
     <string name="t_dist_out_min">Введена дистанція менша табличного діапазону!</string>
     <string name="t_dist_out_max">Введена дистанція більше табличного діапазону!</string>
     <string name="unknown_error">Виявлена невідома помилка!</string>
-    <string name="system_not_loaded">Завантажте вогневу систему!</string>
+
+    <!-- Повідомлення завантаження вогневої системи -->
+    <string name="load_gun_system">Завантажте вогневу систему!</string>
+    <string name="system_not_loaded">Помилка завантаження вогневої системи!\nВогневу систему не завантажено!</string>
 
 </resources>

@@ -100,8 +100,10 @@ public class GUIManager
         @Override
         public void SetFile(String path)
         {
-            if(!m_App.GunSystemLoad(path))
+            if(!m_App.GunSystemLoad(path)) {
+                ShowAlertDialog((String)(m_App.GetActivity().getText(R.string.system_not_loaded)));
                 return;
+            }
 
             m_App.SetCurrentSystemFile(path);
         }
