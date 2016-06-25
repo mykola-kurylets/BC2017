@@ -67,7 +67,7 @@ public class GunSystemFileDlg extends DialogFragment
         // отримання елементів управління діалога
         m_ListView = (ListView)m_Form.findViewById(R.id.file_item);
 
-        m_Adapter = new ArrayAdapter<String>(m_Form.getContext(), android.R.layout.simple_list_item_1, m_AdapterList);
+        m_Adapter = new ArrayAdapter<String>(m_Form.getContext(), R.layout.chose_file_list_item_layout, m_AdapterList);
         m_ListView.setAdapter(m_Adapter);
         m_ListView.setOnItemClickListener(new OnListItemClck());
 
