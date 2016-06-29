@@ -22,33 +22,39 @@ public class ComfigurationManager
         m_SystemFileName = m_UnDefined;
     }
 
-    public static final String m_UnDefined = "?";
+    public static final String m_UnDefined = "?"; // константа невизначеного файлу
 
+    // отримати імя файлу вогневої системи
     public String GetGunSystemFileName()
     {
         return m_SystemFileName;
     }
 
+    // встановити імя файлу вогневої системи
     public void SetGunSystemFileName(String name)
     {
         m_SystemFileName = name;
     }
 
+    // отримати імя папки з таблицями
     public String GetTablesFolderName()
     {
         return m_TablesFolderName;
     }
 
+    // отирмати поточний режим
     public int GetCurrentMode()
     {
         return m_CurrentMode;
     }
 
+    // встановити поточний режим
     public void SetCurentMode(int mode)
     {
         m_CurrentMode = mode;
     }
 
+    // завантажити налаштування
     public boolean Load()
     {
         if(!LoadGeneralPreferences())
@@ -57,6 +63,7 @@ public class ComfigurationManager
         return LoadGUIPreferences();
     }
 
+    // завантажити загальні налаштування
     public boolean LoadGeneralPreferences()
     {
         // читаємо імя останньо вибраної системи
@@ -71,6 +78,7 @@ public class ComfigurationManager
         return true;
     }
 
+    // завантажити налаштування графічного інтерфейсу
     public boolean LoadGUIPreferences()
     {
         SharedPreferences guiPref = m_App.GetPreferances(m_App.GetGUIManager().GetPreferencesName(), MainActivity.MODE_PRIVATE);
@@ -96,6 +104,7 @@ public class ComfigurationManager
         return true;
     }
 
+    // зберегти налаштування
     public boolean Save()
     {
         SharedPreferences gPref = m_App.GetPreferances(m_GeneralPrefTagName, MainActivity.MODE_PRIVATE);
@@ -109,6 +118,7 @@ public class ComfigurationManager
         return SaveGUIPreferences(guiPref);
     }
 
+    // зберегти загальні налаштування
     private boolean SaveGeneralPreferences(SharedPreferences gPref)
     {
         SharedPreferences.Editor prefEditor = gPref.edit();
@@ -124,6 +134,7 @@ public class ComfigurationManager
         return true;
     }
 
+    // зберегти налаштування графічного інтерфейсу
     private boolean SaveGUIPreferences(SharedPreferences guiPref)
     {
         SharedPreferences.Editor prefEditor = guiPref.edit();
@@ -151,13 +162,20 @@ public class ComfigurationManager
     }
 
 
+    // посилання на класс програми
     private Application m_App;
 
+    // тег для зберігання імені файлу
     private final String m_SystemFileTagName    = "system-file";
+    // тег для зберігання імені папки
     private final String m_TablesFolderName     = "bctables";
+    // тег для зберігання загальних налаштувань
     private final String m_GeneralPrefTagName   = "bc2017-general-pref";
+    // тге для зберігання поточного режиму
     private final String m_ModeTagName          = "cur-mode-name";
 
+    // імя файлу вогневої системи
     private String       m_SystemFileName;
+    // поточний режим
     private int          m_CurrentMode;
 }

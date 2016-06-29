@@ -89,6 +89,7 @@ public class Application
         return m_GUIManager;
     }
 
+    // отримати збережені налаштування з головної активності
     public SharedPreferences GetPreferances(String preferencesName, int mode)
     {
         return m_Owner.getSharedPreferences(preferencesName, mode);
@@ -99,6 +100,7 @@ public class Application
         return m_Owner;
     }
 
+    // провести розрахунок поправок
     public ErrorState Calculate(InputData inD, OutputData outD)
     {
         if(!m_GunSystemLoaded)
@@ -127,6 +129,7 @@ public class Application
         GunSystemLoadCheck(folder, m_Config.GetGunSystemFileName());
     }
 
+    // скопіювати файли з папки Assets у вказану папку
     public boolean CopyFilesFromAssets(String destenitionDir, String assetsSubDir)
     {
         AssetManager assetManager = m_Owner.getAssets();
@@ -199,6 +202,7 @@ public class Application
         }
     }
 
+    // отримати шлях до папки фалів програми і при необхідності скопіювати файли в неї
     public String GetFolderPath()
     {
         File externalFolder = m_Owner.getExternalFilesDir(null);
@@ -224,6 +228,7 @@ public class Application
         return bcDirPath;
     }
 
+    // завантаження вогневої системи з перевіркою
     public void GunSystemLoadCheck(String folderPath, String filePath)
     {
         String file = filePath;
@@ -242,6 +247,7 @@ public class Application
         m_GUIManager.ShowGunSystemFileDlg(m_DlgExecuter, startFolder);
     }
 
+    // оголошення слухача подій від діалога вибору вогневої системи
     public class GunSystemFileDlgExecuter implements GunSystemFileDlg.IGunSystemFileDlgListener
     {
         @Override
@@ -251,12 +257,18 @@ public class Application
         }
     }
 
+    // головна акнивність власник классу Програма
     private MainActivity                m_Owner;
 
+    // менеджер графічного інтерфейсу
     private GUIManager                  m_GUIManager;
+    // балістичний модуль
     private BCModule                    m_BCModule;
+    // налаштування програми
     private ComfigurationManager        m_Config;
+    // слухач подій від діалога вибору вогневої системи
     private GunSystemFileDlgExecuter    m_DlgExecuter;
+    // перевірка коректного завантаження вогневої системи
     private boolean                     m_GunSystemLoaded;
 
 }
